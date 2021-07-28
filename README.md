@@ -1,2 +1,4 @@
-# ideation-portal
-GHPR Stack portal to share ideas.
+# Ideation Portal
+
+Idea sharing portal.
+

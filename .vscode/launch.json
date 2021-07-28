@@ -1,0 +1,48 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Delve: Develop",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "remotePath": "",
+      "port": 3000,
+      "host": "0.0.0.0",
+      "program": "${workspaceRoot}/src/controllers",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env",
+      "args": [],
+      "showLog": true
+    },
+    {
+      "name": "Delve: Test Develop",
+      "type": "go",
+      "request": "launch",
+      "mode": "debug",
+      "remotePath": "",
+      "port": 3000,
+      "host": "0.0.0.0",
+      "program": "${workspaceRoot}/src/controllers",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env.test",
+      "args": [],
+      "showLog": true
+    },
+    {
+      "name": "Delve: Test",
+      "type": "go",
+      "request": "launch",
+      "mode": "test",
+      "remotePath": "",
+      "port": 3000,
+      "host": "0.0.0.0",
+      "buildFlags": "-tags 'unit_tests integration_tests all_tests'",
+      "program": "${file}",
+      "env": {},
+      "envFile": "${workspaceRoot}/.env.test",
+      "args": [],
+      "showLog": true
+    }
+  ]
+}
