@@ -1,20 +1,21 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./components/Home/home";
-import Navbar from "./components/Navbar/navbar";
+import Home from "./components/Home/Home";
+import AuthProvider from "./components/Auth/AuthProvider";
+import Navbar from "./components/Navbar/Navbar";
 import './assets/styles/global.scss';
 
 const App = () => {
   return (
-    <React.Fragment>
+    <AuthProvider>
       <Router>
         <Navbar />
         <Switch>
           <Route exact path="/" component={Home} />
         </Switch>
       </Router>
-    </React.Fragment>
+    </AuthProvider>
   );
 };
 
