@@ -24,11 +24,19 @@ module.exports = {
         use: { loader: 'babel-loader' }
       },
       {
-        test: /\.css$/,
-        exclude: /node_modules/,
+        test: /\.s[ac]ss$/i,
         use: [
-          'style-loader',
-          'css-loader'
+          "style-loader",
+          "css-loader",
+          {
+            loader: "sass-loader",
+            options: {
+              implementation: require("sass"),
+              sassOptions: {
+                fiber: false,
+              },
+            },
+          },
         ]
       },
       {
