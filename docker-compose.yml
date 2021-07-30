@@ -1,15 +1,15 @@
 version: '3.6'
 
 services:
-  actions:
-    image: atb00ker/ideation-portal
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - 3000:3000
-    env_file:
-      - .env
+  # actions:
+  #   image: atb00ker/ideation-portal
+  #   build:
+  #     context: .
+  #     dockerfile: Dockerfile
+  #   ports:
+  #     - 3000:3000
+  #   env_file:
+  #     - .env
 
   db:
     image: postgres:alpine

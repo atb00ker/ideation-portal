@@ -26,7 +26,7 @@ const Home = () => {
           <Card className="idea-card mx-auto mt-4">
             <Card.Body>
               <Card.Title>Ideation Portal</Card.Title>
-              <Card.Subtitle className="mb-2 text-muted">Mindset - Product Engineering - Ajay Tripathi</Card.Subtitle>
+              <Card.Subtitle className="mb-2 text-muted">Mindset - Product Engineering</Card.Subtitle>
               <Card.Text>
                 Some quick example text to build on the card title and make up the bulk of
                 the card's content. Some quick example text to build on the card title and make up the

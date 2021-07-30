@@ -1,0 +1,7 @@
+table:
+  name: topics
+  schema: public
+object_relationships:
+- name: author_details
+  using:
+    foreign_key_constraint_on: author
