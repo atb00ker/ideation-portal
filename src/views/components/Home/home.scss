@@ -1,0 +1,42 @@
+/**************************
+* Search Bar Section
+**************************/
+
+#search-icon {
+  transform: translateX(8px);
+  position: absolute;
+  height: 34px;
+  color: gray;
+}
+
+#search-input {
+  width: 100%;
+  max-width: 960px;
+  padding-left: 23px;
+}
+
+/**************************
+* Ideas Card Section
+**************************/
+
+.idea-card {
+  width: 100%;
+  max-width: 960px;
+}
+
+.card-btn {
+  overflow: hidden;
+  width: 110px;
+  height: 40px;
+}
+
+.card-options {
+  display: inline-flex;
+  font-family: inherit;
+}
+
+.card-stepper-container {
+  padding: 0 3%!important;
+  height: 40px;
+  width: calc(100% - 110px);
+}
