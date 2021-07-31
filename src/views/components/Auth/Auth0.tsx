@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import { useAuth0, Auth0Provider, Auth0ProviderOptions } from '@auth0/auth0-react';
 import { IAuth } from '../../interfaces/IAuth';
 import { AuthContext } from './AuthProvider';
@@ -12,10 +12,17 @@ export const ProviderOptions: Auth0ProviderOptions = {
 }
 const AuthConfigurations: React.FC = ({ children }) => {
   const { isLoading, isAuthenticated, loginWithRedirect, logout, user, getIdTokenClaims } = useAuth0();
-  // const [auth, setAuth] = React.useState({} as IAuth);
 
   if (!isLoading && !isAuthenticated) {
     loginWithRedirect();
+  }
+
+  const getJwt = async (): Promise<string> => {
+    if (isAuthenticated) {
+      const token = await getIdTokenClaims()
+      return token.__raw;
+    }
+    return new Promise((_, __) => '');
   }
 
   const auth: IAuth = {
@@ -27,7 +34,7 @@ const AuthConfigurations: React.FC = ({ children }) => {
       id: user?.sub,
       name: user?.name,
       email: user?.email,
-      jwt: getIdTokenClaims
+      jwt: getJwt,
     }
   };
 

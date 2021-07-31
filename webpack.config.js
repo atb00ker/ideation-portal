@@ -24,6 +24,12 @@ module.exports = {
         use: { loader: 'babel-loader' }
       },
       {
+        test: /\.m?js/,
+        resolve: {
+          fullySpecified: false
+        }
+      },
+      {
         test: /\.s[ac]ss$/i,
         use: [
           "style-loader",

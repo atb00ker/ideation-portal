@@ -9,3 +9,33 @@ array_relationships:
       table:
         name: topics
         schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check: {}
+    columns:
+    - id
+    - name
+    - department
+  role: user
+select_permissions:
+- permission:
+    columns:
+    - department
+    - id
+    - name
+    filter: {}
+  role: user
+update_permissions:
+- permission:
+    check: null
+    columns:
+    - department
+    - id
+    - name
+    filter: {}
+  role: user
+delete_permissions:
+- permission:
+    filter: {}
+  role: user
