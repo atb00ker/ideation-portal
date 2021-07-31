@@ -5,7 +5,7 @@ import Home from "./components/Home/Home";
 import AuthProvider from "./components/Auth/AuthProvider";
 import Navbar from "./components/Navbar/Navbar";
 import ApolloProvider from "./components/GraphQL/ApolloProvider";
-import './assets/styles/global.scss';
+import './index.scss';
 
 const App = () => {
   return (

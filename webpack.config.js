@@ -46,11 +46,34 @@ module.exports = {
         ]
       },
       {
-        test: /\.(png|jpe?g|gif)$/,
-        loader: 'url-loader',
-        options: {
-          limit: '10000',
-          name: 'img/[name].[ext]'
+
+        test: /\.svg$/,
+        use: [
+          {
+            loader: 'svg-url-loader',
+            options: {
+              limit: 10000,
+            },
+          },
+        ],
+      },
+      {
+        test: /\.(jpe?g|png|gif|ico)$/i,
+        use: [{
+          loader: 'url-loader',
+          options: {
+            name: '[name].[ext]',
+            outputPath: 'images/'
+          }
+        }]
+      },
+      {
+        test: /\.html$/,
+        use: {
+          loader: 'html-loader',
+          options: {
+            sources: true,
+          }
         }
       }
     ]

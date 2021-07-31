@@ -1,18 +1,17 @@
 import { useQuery, gql } from '@apollo/client';
 
-const GetTopicsCollection = () => {
+const GetTopicsCollection = (limit: number, offset: number) => {
   const queryTopicsCollection = gql`query TopicsCollection {
-    topics(limit: 15, offset: 1) {
+    topics(limit: ${limit}, offset: ${offset}, order_by: {created_at: desc, updated_at: desc}) {
       id
-      description
-      link
+      title
       short_description
       status
-      title
+      category
+      created_at
+      updated_at
       author_details {
         department
-        id
-        name
       }
     }
   }`;

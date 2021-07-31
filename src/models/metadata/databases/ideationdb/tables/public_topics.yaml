@@ -10,37 +10,45 @@ insert_permissions:
     backend_only: false
     check: {}
     columns:
-    - status
     - author
+    - category
     - description
+    - id
     - link
     - short_description
+    - status
     - title
-    - id
+    - updated_at
   role: user
 select_permissions:
 - permission:
     columns:
-    - status
     - author
+    - category
+    - created_at
     - description
+    - id
     - link
     - short_description
+    - status
     - title
-    - id
+    - updated_at
     filter: {}
   role: user
 update_permissions:
 - permission:
     check: null
     columns:
-    - status
     - author
+    - category
+    - created_at
     - description
+    - id
     - link
     - short_description
+    - status
     - title
-    - id
+    - updated_at
     filter: {}
   role: user
 delete_permissions:
