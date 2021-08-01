@@ -1,5 +1,5 @@
 import { gql, useMutation } from '@apollo/client';
-import { updateTopicOnMutate } from './GetTopicsCollection';
+import { ON_UPDATE_TOPICS_REFETCH_LIST, updateTopicOnMutate } from './GetTopicsCollection';
 
 const CreateTopicExistingUser = () => {
   const createTopicQuery = gql`mutation CreateTopic($category: Int, $department: Int, $description: String,
@@ -26,7 +26,8 @@ const CreateTopicExistingUser = () => {
     }`;
 
   const [createTopicExistingUser, {loading: existingUserMutationLoading,
-    error: existingUserMutationError}] = useMutation(createTopicQuery, {update: updateTopicOnMutate});
+    error: existingUserMutationError}] = useMutation(createTopicQuery, { update: updateTopicOnMutate,
+    refetchQueries: ON_UPDATE_TOPICS_REFETCH_LIST });
 
   return { createTopicExistingUser, existingUserMutationLoading, existingUserMutationError };
 };

@@ -1,4 +1,5 @@
 import { useQuery, gql, ApolloCache } from '@apollo/client';
+import { GET_TOPICS_COUNT } from './GetTopicsCount';
 
 
 const GET_TOPIC_COLLECTION = gql`query TopicsCollection($limit: Int, $offset: Int) {
@@ -14,6 +15,10 @@ const GET_TOPIC_COLLECTION = gql`query TopicsCollection($limit: Int, $offset: In
     likes
   }
 }`
+
+export const ON_UPDATE_TOPICS_REFETCH_LIST = [{
+    query: GET_TOPICS_COUNT
+}];
 
 export const updateTopicOnMutate = (cache: ApolloCache<any>, { data }: any) => {
   const topicInCache: any = cache.readQuery({
@@ -33,7 +38,7 @@ export const updateTopicOnMutate = (cache: ApolloCache<any>, { data }: any) => {
 }
 
 const GetTopicsCollection = (limit: number, offset: number) => {
-  return useQuery(GET_TOPIC_COLLECTION, {variables: { limit, offset }});
+  return useQuery(GET_TOPIC_COLLECTION, {variables: { limit, offset }, fetchPolicy: "cache-and-network"});
 };
 
 export default GetTopicsCollection;
