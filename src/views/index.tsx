@@ -1,10 +1,13 @@
 import React from "react";
 import ReactDOM from "react-dom";
 import { HashRouter as Router, Route, Switch } from "react-router-dom";
-import Home from "./components/Home/Home";
+
+import ApolloProvider from "./components/GraphQL/ApolloProvider";
 import AuthProvider from "./components/Auth/AuthProvider";
 import Navbar from "./components/Navbar/Navbar";
-import ApolloProvider from "./components/GraphQL/ApolloProvider";
+import Home from "./pages/Home/Home";
+import TopicAdd from "./pages/TopicAdd/TopicAdd";
+import TopicDetails from "./pages/TopicDetails/TopicDetails";
 import './index.scss';
 
 const App = () => {
@@ -14,6 +17,8 @@ const App = () => {
         <Router>
           <Navbar />
           <Switch>
+            <Route path="/topic/" component={TopicAdd} />
+            <Route path="/topic/:uuid" render={(props) => <TopicDetails {...props} />} />
             <Route exact path="/" component={Home} />
           </Switch>
         </Router>

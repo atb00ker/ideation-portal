@@ -8,50 +8,57 @@ object_relationships:
 insert_permissions:
 - permission:
     backend_only: false
-    check: {}
+    check:
+      author:
+        _eq: X-Hasura-User-Id
     columns:
     - author
     - category
+    - department
     - description
-    - id
     - link
     - short_description
     - status
     - title
-    - updated_at
   role: user
 select_permissions:
 - permission:
     columns:
-    - author
     - category
-    - created_at
+    - department
+    - likes
+    - status
+    - author
     - description
-    - id
     - link
     - short_description
-    - status
     - title
+    - created_at
     - updated_at
+    - id
     filter: {}
   role: user
 update_permissions:
 - permission:
-    check: null
+    check:
+      author:
+        _eq: X-Hasura-User-Id
     columns:
     - author
     - category
-    - created_at
+    - department
     - description
-    - id
     - link
     - short_description
     - status
     - title
-    - updated_at
-    filter: {}
+    filter:
+      author:
+        _eq: X-Hasura-User-Id
   role: user
 delete_permissions:
 - permission:
-    filter: {}
+    filter:
+      author:
+        _eq: X-Hasura-User-Id
   role: user

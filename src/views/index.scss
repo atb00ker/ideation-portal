@@ -3,7 +3,6 @@
 **************************/
 @import "bootstrap/scss/bootstrap";
 
-
 /**************************
 * Global Styles
 **************************/
@@ -13,31 +12,50 @@ body {
   overflow-x: hidden;
 }
 
-label { margin: 0; }
+label {
+  margin: 0;
+}
+
+select {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  text-indent: 1px;
+  text-overflow: "";
+}
+
+.max-width-960 {
+  max-width: 960px;
+}
+
+.button-action-bar {
+  background-color: #f3f3f3;
+  bottom: 0;
+  height: 50px;
+}
 
 /* Scrollbar */
 
-:root{
+:root {
   scrollbar-color: #888 #f1f1f1 !important;
   scrollbar-width: thin !important;
 }
 
 /* width */
 ::-webkit-scrollbar {
-    width: 5px;
+  width: 5px;
 }
 
 /* Track */
 ::-webkit-scrollbar-track {
-    background: #f1f1f1;
+  background: #f1f1f1;
 }
 
 /* Handle */
 ::-webkit-scrollbar-thumb {
-    background: #888;
+  background: #888;
 }
 
 /* Handle on hover */
 ::-webkit-scrollbar-thumb:hover {
-    background: #555;
+  background: #555;
 }

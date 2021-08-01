@@ -7,7 +7,6 @@ import { AuthContext } from '../Auth/AuthProvider';
 import { IAuth } from '../../interfaces/IAuth';
 
 const Navbar = () => {
-  // let { isLoading } = useAuth0();
   const auth: IAuth = React.useContext(AuthContext);
 
   return (

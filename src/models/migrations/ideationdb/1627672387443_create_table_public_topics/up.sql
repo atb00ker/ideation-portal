@@ -1,5 +1,6 @@
 CREATE TABLE "public"."topics" ("title" Text NOT NULL, "description" Text, "short_description" Text, "status" INTEGER
- NOT NULL DEFAULT '0', "category" INTEGER NOT NULL default '0', "author" Text NOT NULL, "link" text, "created_at" timestamptz NOT NULL DEFAULT now(), "updated_at" timestamptz NOT NULL DEFAULT now(), "link" text, "id" uuid NOT NULL DEFAULT gen_random_uuid(), PRIMARY KEY ("id"), FOREIGN KEY ("author") REFERENCES "public"."users"("id") ON UPDATE restrict ON DELETE restrict);COMMENT ON TABLE "public"."topics" IS E'Contain information about ideas and challenges';
+ NOT NULL DEFAULT '0', "category" INTEGER NOT NULL default '0', "author" Text NOT NULL, "link" text, "likes" INTEGER
+ NOT NULL default '0', "created_at" timestamptz NOT NULL DEFAULT now(), "department" INTEGER NOT NULL default '0',"updated_at" timestamptz NOT NULL DEFAULT now(), "id" uuid NOT NULL DEFAULT gen_random_uuid(), PRIMARY KEY ("id"), FOREIGN KEY ("author") REFERENCES "public"."users"("id") ON UPDATE restrict ON DELETE restrict);COMMENT ON TABLE "public"."topics" IS E'Contain information about ideas and challenges';
 CREATE EXTENSION IF NOT EXISTS pgcrypto;
 
 CREATE OR REPLACE FUNCTION "public"."set_current_timestamp_updated_at"()

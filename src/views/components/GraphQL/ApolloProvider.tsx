@@ -1,11 +1,11 @@
-import React, { useEffect, useState } from 'react';
+import React, { useEffect, useState, useContext } from 'react';
 import { ApolloClient, ApolloProvider as BaseApolloProvider, InMemoryCache, HttpLink } from '@apollo/client';
 import { AuthContext } from '../Auth/AuthProvider';
 import { IAuth } from '../../interfaces/IAuth';
 import PageLoader from '../ContentState/PageLoader';
 
 const ApolloProvider: React.FC = ({ children }) => {
-  const auth: IAuth = React.useContext(AuthContext);
+  const auth: IAuth = useContext(AuthContext);
   const [client, setClient] = useState(undefined as unknown as ApolloClient<any>)
   const graphqlServer = new URL(
     process.env.HASURA_GRAPHQL_API_PATHS_GRAPHQL || '',
@@ -33,6 +33,7 @@ const ApolloProvider: React.FC = ({ children }) => {
 
   if (!client)
     return <PageLoader />
+  client.resetStore();
   return (
     <BaseApolloProvider client={client}>
       {children}
