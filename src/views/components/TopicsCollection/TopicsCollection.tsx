@@ -7,8 +7,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import { Link } from "react-router-dom";
 import './topics-collection.scss';
 import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
-import { TopicCategory } from '../../enums/TopicCategory';
-import { TopicDepartment } from '../../enums/TopicDepartment';
+import { getTopicCategoryById, TopicCategory } from '../../enums/TopicCategory';
+import { getDepartmentById, TopicDepartment } from '../../enums/TopicDepartment';
 
 const TopicsCollection: React.FC<any> = ({ topics }) => {
   const [showStepNames, setShowStepNames] = useState(true)
@@ -32,18 +32,18 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
         <Card.Body>
           <Card.Title>{topic.title}</Card.Title>
           <Card.Subtitle className="pt-1 mb-2">
-          <Badge pill bg="primary" className="me-1">
-              {` ${TopicCategory[Object.keys(TopicCategory)[topic.category]].name} `}
+          <Badge bg="primary" className="me-1">
+              {` ${getTopicCategoryById(topic.category)} `}
           </Badge>
-          <Badge pill bg="success" className="me-1">
-              {` ${TopicDepartment[Object.keys(TopicDepartment)[topic.department]].name} `}
+          <Badge bg="success" className="me-1">
+              {` ${getDepartmentById(topic.department)} `}
           </Badge>
-          <Badge pill bg="danger">
+          <Badge bg="danger">
               {` ${topic.likes} `} likes
           </Badge>
           </Card.Subtitle>
           <Card.Text className="p-2">
-            {topic.short_description ? topic.short_description : `${topic.description.substring(0, 240)}...`}
+            {topic.short_description}
           </Card.Text>
         </Card.Body>
         <div className="card-options">

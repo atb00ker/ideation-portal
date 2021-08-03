@@ -8,3 +8,7 @@ export const TopicDepartment: {[key: string]: { id: number, name: string }} = {
       name: 'Product Management'
     }
 };
+
+export const getDepartmentById = (id: number) => {
+  return TopicDepartment[Object.keys(TopicDepartment)[id]].name
+}

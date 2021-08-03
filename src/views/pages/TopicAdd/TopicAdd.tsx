@@ -40,12 +40,15 @@ const TopicAdd = () => {
       event.stopPropagation();
     } else {
       setLoading(true);
+      const formShortDescription = form.elements.topicShortDescription.value ?
+        form.elements.topicShortDescription.value :
+        form.elements.topicDescription.value.substring(0, 240);
       const formValues = {
         category: form.elements.topicCategory.value,
         department: form.elements.topicDepartment.value,
         description: form.elements.topicDescription.value,
         link: form.elements.topicLink.value,
-        short_description: form.elements.topicShortDescription.value,
+        short_description: formShortDescription,
         title: form.elements.topicTitle.value
       }
 

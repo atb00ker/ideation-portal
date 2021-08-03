@@ -33,6 +33,15 @@ select {
   height: 50px;
 }
 
+.button-href {
+  text-decoration: unset;
+  color: white;
+}
+
+.button-href:hover {
+  color: white;
+}
+
 /* Scrollbar */
 
 :root {

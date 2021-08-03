@@ -17,8 +17,8 @@ const App = () => {
         <Router>
           <Navbar />
           <Switch>
-            <Route path="/topic/" component={TopicAdd} />
             <Route path="/topic/:uuid" render={(props) => <TopicDetails {...props} />} />
+            <Route path="/topic/" component={TopicAdd} />
             <Route exact path="/" component={Home} />
           </Switch>
         </Router>

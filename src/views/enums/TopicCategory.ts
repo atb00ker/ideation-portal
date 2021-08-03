@@ -9,3 +9,7 @@ export const TopicCategory: {[key: string]: { id: number, name: string, descript
       description: 'To help set our mindset to align with values.'
     }
 };
+
+export const getTopicCategoryById = (id: number) => {
+  return TopicCategory[Object.keys(TopicCategory)[id]].name
+}
