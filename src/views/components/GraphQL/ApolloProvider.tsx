@@ -6,10 +6,10 @@ import PageLoader from '../ContentState/PageLoader';
 
 const ApolloProvider: React.FC = ({ children }) => {
   const auth: IAuth = useContext(AuthContext);
-  const [client, setClient] = useState(undefined as unknown as ApolloClient<any>)
+  const [client, setClient] = useState(undefined as unknown as ApolloClient<any>);
   const graphqlServer = new URL(
     process.env.HASURA_GRAPHQL_API_PATHS_GRAPHQL || '',
-    process.env.HASURA_GRAPHQL_ENDPOINT
+    process.env.HASURA_GRAPHQL_ENDPOINT,
   );
 
   const createApolloClient = (authToken: string) => {
@@ -17,7 +17,7 @@ const ApolloProvider: React.FC = ({ children }) => {
       link: new HttpLink({
         uri: graphqlServer.toString(),
         headers: {
-          Authorization: `Bearer ${authToken}`
+          Authorization: `Bearer ${authToken}`,
         },
       }),
       cache: new InMemoryCache(),
@@ -30,15 +30,9 @@ const ApolloProvider: React.FC = ({ children }) => {
     }
   }, [auth]);
 
-
-  if (!client)
-    return <PageLoader />
+  if (!client) return <PageLoader />;
   client.resetStore();
-  return (
-    <BaseApolloProvider client={client}>
-      {children}
-    </BaseApolloProvider>
-  );
+  return <BaseApolloProvider client={client}>{children}</BaseApolloProvider>;
 };
 
 export default ApolloProvider;

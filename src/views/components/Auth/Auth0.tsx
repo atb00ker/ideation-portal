@@ -9,8 +9,8 @@ export const ProviderOptions: Auth0ProviderOptions = {
   domain: process.env.AUTH0_DOMAIN || '',
   clientId: process.env.AUTH0_CLIENT_ID || '',
   redirectUri: window.location.origin,
-  cacheLocation: "localstorage"
-}
+  cacheLocation: 'localstorage',
+};
 const AuthConfigurations: React.FC = ({ children }) => {
   const { isLoading, isAuthenticated, loginWithRedirect, logout, user, getIdTokenClaims } = useAuth0();
 
@@ -20,11 +20,11 @@ const AuthConfigurations: React.FC = ({ children }) => {
 
   const getJwt = async (): Promise<string> => {
     if (isAuthenticated) {
-      const token = await getIdTokenClaims()
+      const token = await getIdTokenClaims();
       return token.__raw;
     }
     return new Promise((_, __) => '');
-  }
+  };
 
   const auth: IAuth = {
     loginWithRedirect: loginWithRedirect,
@@ -36,20 +36,18 @@ const AuthConfigurations: React.FC = ({ children }) => {
       name: user?.name,
       email: user?.email,
       jwt: getJwt,
-    }
+    },
   };
 
   if (auth.isReady && !auth.isAuthenticated) {
     loginWithRedirect();
-    return <PageLoader />
+    return <PageLoader />;
   }
   return (
     <React.Fragment>
-      <AuthContext.Provider value={auth}>
-        {children}
-      </AuthContext.Provider>
+      <AuthContext.Provider value={auth}>{children}</AuthContext.Provider>
     </React.Fragment>
   );
-}
+};
 
 export default AuthConfigurations;

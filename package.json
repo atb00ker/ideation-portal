@@ -22,7 +22,8 @@
     "test": "env-cmd -f .env.test npm run coverage",
     "react-start": "webpack serve --open --mode development",
     "react-build": "webpack --mode production",
-    "react-test": "jest --runInBand --detectOpenHandles"
+    "react-test": "jest --runInBand --detectOpenHandles",
+    "lint": "prettier --write \"**/*.tsx\" && prettier --write \"**/*.ts\""
   },
   "repository": {
     "type": "git",

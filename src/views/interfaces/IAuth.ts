@@ -1,9 +1,9 @@
-import { IUser } from "./IUser";
+import { IUser } from './IUser';
 
 export interface IAuth {
-  loginWithRedirect: (options?: any) => Promise<void>,
+  loginWithRedirect: (options?: any) => Promise<void>;
   logout: (options?: any) => void;
-  isAuthenticated?: boolean,
-  isReady?: boolean,
-  user: IUser
-};
+  isAuthenticated?: boolean;
+  isReady?: boolean;
+  user: IUser;
+}

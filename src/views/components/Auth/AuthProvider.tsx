@@ -7,9 +7,7 @@ export const AuthContext = React.createContext<IAuth>(undefined as unknown as IA
 const AuthProvider: React.FC = ({ children }) => {
   return (
     <Provider {...ProviderOptions}>
-      <AuthConfigurations>
-        {children}
-      </AuthConfigurations>
+      <AuthConfigurations>{children}</AuthConfigurations>
     </Provider>
   );
 };
