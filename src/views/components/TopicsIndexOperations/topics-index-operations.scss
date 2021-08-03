@@ -1,0 +1,20 @@
+/**************************
+* Search Bar Section
+**************************/
+
+#search-icon-btn {
+  margin-left: 6px;
+  width: 38px;
+  height: 38px;
+}
+
+#search-icon {
+  transform: translateX(-3px);
+  height: 24px;
+  width: 24px;
+}
+
+#search-input {
+  width: calc(100% - 40px);
+  padding-left: 23px;
+}

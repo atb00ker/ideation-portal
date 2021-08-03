@@ -7,8 +7,8 @@ import StepLabel from '@material-ui/core/StepLabel';
 import { Link } from 'react-router-dom';
 import './topics-collection.scss';
 import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
-import { getTopicCategoryById, TopicCategory } from '../../enums/TopicCategory';
-import { getDepartmentById, TopicDepartment } from '../../enums/TopicDepartment';
+import { getTopicCategoryById } from '../../enums/TopicCategory';
+import { getDepartmentById } from '../../enums/TopicDepartment';
 
 const TopicsCollection: React.FC<any> = ({ topics }) => {
   const [showStepNames, setShowStepNames] = useState(true);
@@ -26,7 +26,7 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
   return (
     <React.Fragment>
       {topics.map((topic: any) => (
-        <Card key={topic.id} className='idea-card mt-4'>
+        <Card key={topic.id} className='idea-card mb-3'>
           <Card.Body>
             <Card.Title>{topic.title}</Card.Title>
             <Card.Subtitle className='pt-1 mb-2'>
@@ -36,7 +36,7 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
               <Badge bg='success' className='me-1'>
                 {` ${getDepartmentById(topic.department)} `}
               </Badge>
-              <Badge bg='danger'>{` ${topic.likes} `} likes</Badge>
+              <Badge bg='secondary'>{` ${topic.likes} `} likes</Badge>
             </Card.Subtitle>
             <Card.Text className='p-2'>{topic.short_description}</Card.Text>
           </Card.Body>

@@ -19,8 +19,8 @@ const GET_TOPIC_BYPK = gql`
   }
 `;
 
-const GetTopicsCollection = (pk: string) => {
+const GetTopicsByPk = (pk: string) => {
   return useQuery(GET_TOPIC_BYPK, { variables: { pk } });
 };
 
-export default GetTopicsCollection;
+export default GetTopicsByPk;

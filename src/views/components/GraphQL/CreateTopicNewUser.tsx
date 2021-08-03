@@ -1,17 +1,17 @@
 import { gql, useMutation } from '@apollo/client';
-import { ON_UPDATE_TOPICS_REFETCH_LIST, updateTopicOnMutate } from './GetTopicsCollection';
+// import { updateTopicOnMutate } from './GetTopicsCollection';
 
 const CreateTopicNewUser = () => {
   const createTopicQuery = gql`
     mutation CreateTopic(
-      $category: Int
-      $department: Int
-      $description: String
+      $category: Int!
+      $department: Int!
+      $description: String!
       $link: String
-      $short_description: String
-      $title: String
-      $author_id: String
-      $author_name: String
+      $short_description: String!
+      $title: String!
+      $author_id: String!
+      $author_name: String!
     ) {
       insert_topics_one(
         object: {
@@ -39,8 +39,8 @@ const CreateTopicNewUser = () => {
   const [createTopicNewUser, { loading: newUserMutationLoading, error: newUserMutationError }] = useMutation(
     createTopicQuery,
     {
-      update: updateTopicOnMutate,
-      refetchQueries: ON_UPDATE_TOPICS_REFETCH_LIST,
+      // update: updateTopicOnMutate,
+      // refetchQueries: [],
     },
   );
 
