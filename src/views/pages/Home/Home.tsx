@@ -14,6 +14,7 @@ import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import NoRecordsFound from '../../components/ContentState/NoRecordsFound';
 import GetTopicsCount from '../../components/GraphQL/GetTopicsCount';
+import SearchSvg from '../../assets/icons/bootstrap-search.svg';
 import './home.scss';
 
 const Home = () => {

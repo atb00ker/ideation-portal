@@ -162,9 +162,9 @@ const TopicAdd = () => {
                 <Form.Group as={Row} className="mb-3" controlId="topicShortDescription">
                   <Form.Label column sm="2">Short Description</Form.Label>
                   <Col sm="10">
-                    <Form.Control as="textarea" rows={2} placeholder="Enter a short description (Optional)" />
+                    <Form.Control as="textarea" maxLength={50} rows={2} placeholder="Enter a short description (Optional)" />
                     <Form.Text className="text-muted">
-                      Write a crisp version of the description to captive readers browsing on the home page.
+                      Write a crisp version of the description in 240 characters to captivate readers browsing on the home page.
                       If not provided, description would be shortened and presented in the list.
                     </Form.Text>
                   </Col>

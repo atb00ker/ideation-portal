@@ -7,6 +7,7 @@ const GET_TOPIC_COLLECTION = gql`query TopicsCollection($limit: Int, $offset: In
     id
     title
     short_description
+    description
     status
     category
     created_at
