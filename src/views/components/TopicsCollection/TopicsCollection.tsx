@@ -9,6 +9,7 @@ import './topics-collection.scss';
 import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
 import { getTopicCategoryById } from '../../enums/TopicCategory';
 import { getDepartmentById } from '../../enums/TopicDepartment';
+import { RouterPath } from '../../enums/RouterPath';
 
 const TopicsCollection: React.FC<any> = ({ topics }) => {
   const [showStepNames, setShowStepNames] = useState(true);
@@ -48,7 +49,7 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
                 </Step>
               ))}
             </Stepper>
-            <Link className='rounded-0 card-btn btn btn-primary' to={`/topic/${topic.id}`}>
+            <Link className='rounded-0 card-btn btn btn-primary' to={`${RouterPath.Topic}${topic.id}`}>
               Read More
             </Link>
           </div>

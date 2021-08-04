@@ -13,6 +13,7 @@ import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
 import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
 import { TopicDepartment } from '../../enums/TopicDepartment';
 import { TopicCategory } from '../../enums/TopicCategory';
+import { RouterPath } from '../../enums/RouterPath';
 import './topics-index-operations.scss';
 
 const Home: React.FC<{ onClickSearchInput: (value: string) => void }> = ({ onClickSearchInput }) => {
@@ -33,7 +34,7 @@ const Home: React.FC<{ onClickSearchInput: (value: string) => void }> = ({ onCli
                 Please click the 'add' button to share.
               </Col>
               <Col className='pe-0' sm={2} md={1}>
-                <Link to={'/topic/'}>
+                <Link to={RouterPath.Topic}>
                   <Button className='float-end' variant='primary'>
                     Add
                   </Button>
