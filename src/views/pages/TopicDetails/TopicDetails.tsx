@@ -9,7 +9,7 @@ import { Step, StepLabel, Stepper } from '@material-ui/core';
 import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import GetTopicByPk from '../../components/GraphQL/GetTopicByPk';
-import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
+import { TopicStatus } from '../../enums/TopicStatus';
 import { getTopicCategoryById } from '../../enums/TopicCategory';
 import { getDepartmentById } from '../../enums/TopicDepartment';
 
@@ -38,9 +38,9 @@ const TopicDetails = (props: any) => {
           </Col>
           <Col xs={12}>
             <Stepper activeStep={topicData.topics_by_pk.status} alternativeLabel>
-              {Object.keys(TopicStatusSteps).map(key => (
-                <Step key={TopicStatusSteps[key].id}>
-                  <StepLabel>{TopicStatusSteps[key].name}</StepLabel>
+              {Object.keys(TopicStatus).map(key => (
+                <Step key={TopicStatus[key].id}>
+                  <StepLabel>{TopicStatus[key].name}</StepLabel>
                 </Step>
               ))}
             </Stepper>

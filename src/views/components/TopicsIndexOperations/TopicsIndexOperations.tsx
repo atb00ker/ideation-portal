@@ -3,24 +3,33 @@ import { Link } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
 import Button from 'react-bootstrap/Button';
-import DropdownButton from 'react-bootstrap/DropdownButton';
-import ButtonGroup from 'react-bootstrap/ButtonGroup';
-import Dropdown from 'react-bootstrap/Dropdown';
 import { ErrorBoundary } from 'react-error-boundary';
 import Form from 'react-bootstrap/Form';
 
 import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
-import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
+import { TopicStatus } from '../../enums/TopicStatus';
 import { TopicDepartment } from '../../enums/TopicDepartment';
 import { TopicCategory } from '../../enums/TopicCategory';
 import { RouterPath } from '../../enums/RouterPath';
 import './topics-index-operations.scss';
 
-const Home: React.FC<{ onClickSearchInput: (value: string) => void }> = ({ onClickSearchInput }) => {
-  const triggerSearch = (event: FormEvent<HTMLFormElement>) => {
+interface ITopicsIndexOperations {
+  onClickSearchInput: (value: string) => void;
+  onChangeDepartment: (value: number[]) => void;
+  onChangeCategory: (value: number[]) => void;
+  onChangeStatus: (value: number[]) => void;
+}
+
+const TopicsIndexOperations: React.FC<ITopicsIndexOperations> = ({
+  onClickSearchInput,
+  onChangeDepartment,
+  onChangeCategory,
+  onChangeStatus,
+}) => {
+  const triggerSearch = (event: any) => {
     event.preventDefault();
     const form = event.currentTarget;
-    onClickSearchInput((form.elements.namedItem('search-input') as any)?.value || '');
+    onClickSearchInput(form.elements.namedItem('search-input').value || '');
   };
 
   return (
@@ -70,34 +79,43 @@ const Home: React.FC<{ onClickSearchInput: (value: string) => void }> = ({ onCli
             </div>
           </ErrorBoundary>
         </Col>
-        <Col xs={12} className='mb-3 p-0 me-1'>
-          {[
-            ['Category', TopicCategory],
-            ['Department', TopicDepartment],
-            ['Status', TopicStatusSteps],
-          ].map(item => {
-            const filterOn: any = item[0];
-            const filterOptions: any = item[1];
-            return (
-              <DropdownButton
-                className='me-1'
-                as={ButtonGroup}
-                size='sm'
-                key={filterOn}
-                id='dropdown-item-button'
-                title={filterOn}>
-                {Object.keys(filterOptions).map(key => (
-                  <Dropdown.Item key={filterOptions[key].id} value={filterOptions[key].id} as='button'>
-                    {filterOptions[key].name}
-                  </Dropdown.Item>
-                ))}
-              </DropdownButton>
-            );
-          })}
-        </Col>
+      </Row>
+      <Row className='max-width-960 mx-auto'>
+        {[
+          ['All Categories', TopicCategory, onChangeCategory],
+          ['All Departments', TopicDepartment, onChangeDepartment],
+          ['All Statuses', TopicStatus, onChangeStatus],
+        ].map(item => {
+          const filterOn: any = item[0];
+          const filterOptions: any = item[1];
+          const changeAction: any = item[2];
+          return (
+            <Col xs={3} key={filterOn} className='mb-3 p-0 me-1'>
+              <Form>
+                <Form.Group className='mb-3' controlId={filterOn.replace(/ /g, '')}>
+                  <Form.Select
+                    defaultValue={filterOn}
+                    onChange={event => {
+                      const inputValue = event.currentTarget.value.split(',').map(value => parseInt(value));
+                      changeAction(inputValue);
+                    }}>
+                    <option value={Object.keys(filterOptions).map(key => filterOptions[key].id)}>
+                      {filterOn}
+                    </option>
+                    {Object.keys(filterOptions).map(key => (
+                      <option key={filterOptions[key].id} value={filterOptions[key].id}>
+                        {filterOptions[key].name}
+                      </option>
+                    ))}
+                  </Form.Select>
+                </Form.Group>
+              </Form>
+            </Col>
+          );
+        })}
       </Row>
     </>
   );
 };
 
-export default Home;
+export default TopicsIndexOperations;

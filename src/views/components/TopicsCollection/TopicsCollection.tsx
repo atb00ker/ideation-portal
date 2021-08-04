@@ -6,7 +6,7 @@ import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import { Link } from 'react-router-dom';
 import './topics-collection.scss';
-import { TopicStatusSteps } from '../../enums/TopicStatusSteps';
+import { TopicStatus } from '../../enums/TopicStatus';
 import { getTopicCategoryById } from '../../enums/TopicCategory';
 import { getDepartmentById } from '../../enums/TopicDepartment';
 import { RouterPath } from '../../enums/RouterPath';
@@ -43,9 +43,9 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
           </Card.Body>
           <div className='card-options'>
             <Stepper className='card-stepper-container' activeStep={topic.status}>
-              {Object.keys(TopicStatusSteps).map(key => (
-                <Step key={TopicStatusSteps[key].id}>
-                  <StepLabel>{showStepNames && TopicStatusSteps[key].name}</StepLabel>
+              {Object.keys(TopicStatus).map(key => (
+                <Step key={TopicStatus[key].id}>
+                  <StepLabel>{showStepNames && TopicStatus[key].name}</StepLabel>
                 </Step>
               ))}
             </Stepper>

@@ -12,24 +12,36 @@ import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import NoRecordsFound from '../../components/ContentState/NoRecordsFound';
 import TopicsIndexOperations from '../../components/TopicsIndexOperations/TopicsIndexOperations';
+import { TopicDepartment } from '../../enums/TopicDepartment';
+import { TopicCategory } from '../../enums/TopicCategory';
+import { TopicStatus } from '../../enums/TopicStatus';
+import { IGetTopicCollectionInput } from '../../interfaces/IGetTopicCollectionInput';
 
 const Home = () => {
   let pageSize = 5;
   const [pageActive, setPageActive] = useState(0);
-  const [searchFilter, setSearchFilter] = useState('');
   const [pageCount, setPageCount] = useState(1);
+  const [searchFilter, setSearchFilter] = useState('');
+  const [statusFilter, setStatusFilter] = useState(Object.keys(TopicStatus).map(key => TopicStatus[key].id));
+  const [departmentFilter, setDepartmentFilter] = useState(
+    Object.keys(TopicDepartment).map(key => TopicDepartment[key].id),
+  );
+  const [categoryFilter, setCategoryFilter] = useState(
+    Object.keys(TopicCategory).map(key => TopicCategory[key].id),
+  );
 
   const {
     loading: topicsLoading,
     data: topicsData,
     error: topicsError,
-  } = GetTopicsCollection(pageSize, pageSize * pageActive, searchFilter);
-
-  const triggerTopicFilter = (searchValue: string) => {
-    setSearchFilter(searchValue);
-    setPageActive(0);
-  };
-
+  } = GetTopicsCollection({
+    limit: pageSize,
+    offset: pageSize * pageActive,
+    searchFilter,
+    categoryIdList: categoryFilter,
+    departmentIdList: departmentFilter,
+    statusIdList: statusFilter,
+  } as IGetTopicCollectionInput);
 
   const filteredTopics = useMemo(() => {
     if (!topicsData?.topics?.length) return [];
@@ -45,10 +57,19 @@ const Home = () => {
     else setPageCount(Math.ceil(topicsData.topics_aggregate.aggregate.count / pageSize));
   }, [topicsData]);
 
+  useEffect(() => {
+    setPageActive(0);
+  }, [searchFilter, statusFilter, departmentFilter, categoryFilter]);
+
   if (topicsLoading)
     return (
       <Container>
-        <TopicsIndexOperations onClickSearchInput={triggerTopicFilter} />
+        <TopicsIndexOperations
+          onClickSearchInput={setSearchFilter}
+          onChangeDepartment={setDepartmentFilter}
+          onChangeCategory={setCategoryFilter}
+          onChangeStatus={setStatusFilter}
+        />
         <SectionLoader height='500px' width='100%' />
       </Container>
     );
@@ -61,7 +82,12 @@ const Home = () => {
   if (!filteredTopics.length) {
     return (
       <Container>
-        <TopicsIndexOperations onClickSearchInput={triggerTopicFilter} />
+        <TopicsIndexOperations
+          onClickSearchInput={setSearchFilter}
+          onChangeDepartment={setDepartmentFilter}
+          onChangeCategory={setCategoryFilter}
+          onChangeStatus={setStatusFilter}
+        />
         <NoRecordsFound height='500px' imgHeight='250px' width='100%' />
       </Container>
     );
@@ -71,7 +97,12 @@ const Home = () => {
 
   return (
     <Container>
-      <TopicsIndexOperations onClickSearchInput={triggerTopicFilter} />
+      <TopicsIndexOperations
+        onClickSearchInput={setSearchFilter}
+        onChangeDepartment={setDepartmentFilter}
+        onChangeCategory={setCategoryFilter}
+        onChangeStatus={setStatusFilter}
+      />
       <Row className='max-width-960 mx-auto'>
         <Col xs={12} className='mb-5 p-0'>
           <ErrorBoundary FallbackComponent={ErrorFallback}>

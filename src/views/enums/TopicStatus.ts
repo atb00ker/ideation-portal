@@ -1,4 +1,4 @@
-export const TopicStatusSteps: { [key: string]: { id: number; name: string } } = {
+export const TopicStatus: { [key: string]: { id: number; name: string } } = {
   PROPOSED: {
     id: 0,
     name: 'Proposed',
