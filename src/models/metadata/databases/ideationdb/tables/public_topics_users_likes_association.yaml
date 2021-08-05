@@ -1,0 +1,27 @@
+table:
+  name: topics_users_likes_association
+  schema: public
+insert_permissions:
+- permission:
+    backend_only: false
+    check:
+      users_pk:
+        _eq: X-Hasura-User-Id
+    columns:
+    - topics_pk
+    - users_pk
+  role: user
+select_permissions:
+- permission:
+    allow_aggregations: true
+    columns:
+    - topics_pk
+    - users_pk
+    filter: {}
+  role: user
+delete_permissions:
+- permission:
+    filter:
+      users_pk:
+        _eq: X-Hasura-User-Id
+  role: user

@@ -9,6 +9,13 @@ array_relationships:
       table:
         name: topics
         schema: public
+- name: topics_users_likes_associations
+  using:
+    foreign_key_constraint_on:
+      column: users_pk
+      table:
+        name: topics_users_likes_association
+        schema: public
 insert_permissions:
 - permission:
     backend_only: false

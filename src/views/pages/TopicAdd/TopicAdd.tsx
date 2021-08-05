@@ -28,9 +28,9 @@ const TopicAdd = () => {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
   const { data: userData, loading: userLoading, error: userError } = CheckUserExists(auth.user.id || '');
+  const { createTopicNewUser, newUserMutationLoading, newUserMutationError } = CreateTopicNewUser();
   const { createTopicExistingUser, existingUserMutationLoading, existingUserMutationError } =
     CreateTopicExistingUser();
-  const { createTopicNewUser, newUserMutationLoading, newUserMutationError } = CreateTopicNewUser();
 
   const handleAddFormSubmit = (event: any) => {
     const form = event.currentTarget;

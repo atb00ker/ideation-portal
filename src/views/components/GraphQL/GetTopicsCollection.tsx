@@ -31,7 +31,11 @@ const GET_TOPIC_COLLECTION = gql`
       created_at
       updated_at
       department
-      likes
+      topics_users_likes_associations_aggregate {
+        aggregate {
+          count
+        }
+      }
     }
     topics_aggregate(
       where: {

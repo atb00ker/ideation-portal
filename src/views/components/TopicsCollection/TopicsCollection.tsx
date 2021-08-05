@@ -37,7 +37,9 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
               <Badge bg='success' className='me-1'>
                 {` ${getDepartmentById(topic.department)} `}
               </Badge>
-              <Badge bg='secondary'>{` ${topic.likes} `} likes</Badge>
+              <Badge bg='secondary'>
+                {` ${topic.topics_users_likes_associations_aggregate.aggregate.count} `} likes
+              </Badge>
             </Card.Subtitle>
             <Card.Text className='p-2'>{topic.short_description}</Card.Text>
           </Card.Body>

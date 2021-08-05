@@ -25,14 +25,6 @@ const CreateTopicNewUser = () => {
         }
       ) {
         id
-        title
-        short_description
-        status
-        category
-        created_at
-        updated_at
-        department
-        likes
       }
     }
   `;

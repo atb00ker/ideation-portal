@@ -1,2 +1,3 @@
 - "!include public_topics.yaml"
+- "!include public_topics_users_likes_association.yaml"
 - "!include public_users.yaml"
