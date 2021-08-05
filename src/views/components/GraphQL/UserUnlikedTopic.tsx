@@ -12,6 +12,7 @@ const UserUnlikedTopic = (topics_pk: string, users_pk: string) => {
 
   const [userUnlikedTopic, { error: unlikedError }] = useMutation(createTopicQuery, {
     variables: { topics_pk, users_pk },
+    refetchQueries: [],
     optimisticResponse: {
       delete_topics_users_likes_association_by_pk: {
         __typename: 'delete_topics_users_likes_association_by_pk',

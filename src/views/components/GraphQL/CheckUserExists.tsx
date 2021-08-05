@@ -8,6 +8,7 @@ const CheckUserExists = (userId: string) => {
       }
     }
   `;
+
   return useQuery(queryTopicsCollection, {
     variables: { userId },
     fetchPolicy: 'no-cache',

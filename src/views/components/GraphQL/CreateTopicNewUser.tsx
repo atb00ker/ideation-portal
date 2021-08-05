@@ -1,5 +1,4 @@
 import { gql, useMutation } from '@apollo/client';
-// import { updateTopicOnMutate } from './GetTopicsCollection';
 
 const CreateTopicNewUser = () => {
   const createTopicQuery = gql`
@@ -28,13 +27,8 @@ const CreateTopicNewUser = () => {
       }
     }
   `;
-  const [createTopicNewUser, { loading: newUserMutationLoading, error: newUserMutationError }] = useMutation(
-    createTopicQuery,
-    {
-      // update: updateTopicOnMutate,
-      // refetchQueries: [],
-    },
-  );
+  const [createTopicNewUser, { loading: newUserMutationLoading, error: newUserMutationError }] =
+    useMutation(createTopicQuery);
 
   return { createTopicNewUser, newUserMutationLoading, newUserMutationError };
 };

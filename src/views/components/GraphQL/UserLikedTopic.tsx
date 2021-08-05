@@ -13,6 +13,7 @@ const UserLikedTopic = (topics_pk: string, users_pk: string) => {
 
   const [userLikedTopic, { error: likedError }] = useMutation(createTopicQuery, {
     variables: { topics_pk, users_pk },
+    refetchQueries: [],
     optimisticResponse: {
       insert_topics_users_likes_association_one: {
         __typename: 'insert_topics_users_likes_association_one',
