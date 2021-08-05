@@ -27,7 +27,7 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
   return (
     <React.Fragment>
       {topics.map((topic: any) => (
-        <Card key={topic.id} className='idea-card mb-3'>
+        <Card key={topic.id} className='rounded-0 idea-card mb-3'>
           <Card.Body>
             <Card.Title>{topic.title}</Card.Title>
             <Card.Subtitle className='pt-1 mb-2'>

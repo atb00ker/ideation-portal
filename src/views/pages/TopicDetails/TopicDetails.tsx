@@ -1,10 +1,11 @@
-import React from 'react';
+import React, { useContext } from 'react';
 import Container from 'react-bootstrap/Container';
 import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
 import { Step, StepLabel, Stepper } from '@material-ui/core';
+import { useHistory } from 'react-router-dom';
 
 import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
@@ -16,14 +17,32 @@ import { IAuth } from '../../interfaces/IAuth';
 import { AuthContext } from '../../components/Auth/AuthProvider';
 import UserLikedTopic from '../../components/GraphQL/UserLikedTopic';
 import UserUnlikedTopic from '../../components/GraphQL/UserUnlikedTopic';
+import ChangeTopicStep from '../../components/GraphQL/ChangeTopicStep';
 
 const TopicDetails = (props: any) => {
-  const auth: IAuth = React.useContext(AuthContext);
-  const topic_pk = props.match.params.uuid;
+  const auth: IAuth = useContext(AuthContext);
+  const history = useHistory();
+  const topics_pk = props.match.params.uuid;
   const users_pk = auth.user.id || '';
-  const { userLikedTopic } = UserLikedTopic(topic_pk, users_pk);
-  const { userUnlikedTopic } = UserUnlikedTopic(topic_pk, users_pk);
-  const { loading: topicLoading, data: topicData, error: topicError } = GetTopicByPk(topic_pk, users_pk);
+  const { userLikedTopic } = UserLikedTopic(topics_pk, users_pk);
+  const { userUnlikedTopic } = UserUnlikedTopic(topics_pk, users_pk);
+  const { changeTopicStep } = ChangeTopicStep(topics_pk, users_pk);
+  const { loading: topicLoading, data: topicData, error: topicError } = GetTopicByPk(topics_pk, users_pk);
+  const dateFormatOptions: Intl.DateTimeFormatOptions = {
+    year: 'numeric',
+    month: 'long',
+    day: 'numeric',
+  };
+  const handleChangeStep = (step_inc: number) => {
+    changeTopicStep({
+      variables: { topics_pk, step_inc },
+      optimisticResponse: {
+        update_topics_by_pk: {
+          status: topicData.topics_by_pk.status + step_inc,
+        },
+      },
+    }).catch(error => console.error(error));
+  };
 
   if (topicLoading) return <SectionLoader height='500px' width='100%' />;
 
@@ -32,13 +51,7 @@ const TopicDetails = (props: any) => {
     return <ServerRequestError height='500px' imgHeight='250px' width='100%' />;
   }
 
-  const dateFormatOptions: Intl.DateTimeFormatOptions = {
-    year: 'numeric',
-    month: 'long',
-    day: 'numeric',
-  };
   const userLiked = topicData.topics_by_pk.userLiked.aggregate.count;
-
   return (
     <React.Fragment>
       <Container>
@@ -95,6 +108,27 @@ const TopicDetails = (props: any) => {
             </Badge>
           </Col>
           <Col xs={12} className='mb-5 m-auto max-width-960'>
+            <Button
+              onClick={() => {
+                history.push('/');
+              }}
+              variant='outline-primary'
+              className='btn-sm me-2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                fill='currentColor'
+                className='bi bi-arrow-return-left'
+                viewBox='0 0 16 16'>
+                <path
+                  fillRule='evenodd'
+                  d='M14.5 1.5a.5.5 0 0 1 .5.5v4.8a2.5 2.5 0 0 1-2.5 2.5H2.707l3.347 3.346a.5.5 0 0 1-.708.708l-4.2-4.2a.5.5 0 0 1 0-.708l4-4a.5.5 0 1 1 .708.708L2.707 8.3H12.5A1.5 1.5 0 0 0 14 6.8V2a.5.5 0 0 1 .5-.5z'
+                />
+              </svg>{' '}
+              {'  '}
+              Back
+            </Button>
             {!!userLiked && (
               <Button
                 onClick={() => userUnlikedTopic().catch(error => console.error(error))}
@@ -129,6 +163,46 @@ const TopicDetails = (props: any) => {
                 </svg>
               </Button>
             )}
+            <Button
+              onClick={() => handleChangeStep(-1)}
+              disabled={topicData.topics_by_pk.status <= 0}
+              variant='outline-primary'
+              className='btn-sm me-2'>
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                style={{ transform: 'translateY(-1px)' }}
+                fill='currentColor'
+                className='bi bi-chevron-left'
+                viewBox='0 0 16 16'>
+                <path
+                  fillRule='evenodd'
+                  d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
+                />
+              </svg>{' '}
+              Previous Step
+            </Button>
+            <Button
+              onClick={() => handleChangeStep(1)}
+              disabled={topicData.topics_by_pk.status >= Object.keys(TopicStatus).length - 1}
+              variant='outline-primary'
+              className='btn-sm me-2'>
+              Next Step{' '}
+              <svg
+                xmlns='http://www.w3.org/2000/svg'
+                width='16'
+                height='16'
+                fill='currentColor'
+                style={{ transform: 'translateY(-1px)' }}
+                className='bi bi-chevron-right'
+                viewBox='0 0 16 16'>
+                <path
+                  fillRule='evenodd'
+                  d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
+                />
+              </svg>
+            </Button>
           </Col>
         </Row>
       </Container>
