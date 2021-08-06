@@ -8,6 +8,7 @@
   "scripts": {
     "docker": "docker-compose up -d",
     "metadata": "hasura metadata apply --log-level=DEBUG",
+    "metadata-export": "hasura metadata export --log-level=DEBUG",
     "metadata-reload": "hasura metadata reload --log-level=DEBUG",
     "migrate": "hasura migrate apply --log-level=DEBUG --all-databases",
     "hasura": "hasura console --skip-update-check --no-browser --log-level=DEBUG",

@@ -47,6 +47,7 @@ const TopicAdd = () => {
       const userValues = {
         author_id: auth.user.id,
         author_name: auth.user.name,
+        author_email: auth.user.email,
       };
 
       createTopic({ variables: { ...formValues, ...userValues } })

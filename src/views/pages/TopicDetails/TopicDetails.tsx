@@ -24,7 +24,12 @@ const TopicDetails = (props: any) => {
   const history = useHistory();
   const topics_pk = props.match.params.uuid;
   const users_pk = auth.user.id || '';
-  const { userLikedTopic } = UserLikedTopic(topics_pk, users_pk, auth.user?.name || '');
+  const { userLikedTopic } = UserLikedTopic(
+    topics_pk,
+    users_pk,
+    auth.user?.name || '',
+    auth.user?.email || '',
+  );
   const { userUnlikedTopic } = UserUnlikedTopic(topics_pk, users_pk);
   const { changeTopicStep } = ChangeTopicStep(topics_pk, users_pk);
   const { loading: topicLoading, data: topicData, error: topicError } = GetTopicByPk(topics_pk, users_pk);

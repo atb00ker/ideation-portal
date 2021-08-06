@@ -23,6 +23,7 @@ insert_permissions:
       id:
         _eq: X-Hasura-User-Id
     columns:
+    - email
     - id
     - name
   role: user
@@ -32,6 +33,7 @@ select_permissions:
     columns:
     - id
     - name
+    - email
     filter: {}
   role: user
 update_permissions:
@@ -40,7 +42,7 @@ update_permissions:
       id:
         _eq: X-Hasura-User-Id
     columns:
-    - id
+    - email
     - name
     filter:
       id:

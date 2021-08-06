@@ -2,7 +2,7 @@ import { ApolloCache, gql, useMutation } from '@apollo/client';
 import { GET_TOPIC_BY_PK } from './GetTopicByPk';
 
 const UserUnlikedTopic = (topics_pk: string, users_pk: string) => {
-  const createTopicQuery = gql`
+  const userUnlikedQuery = gql`
     mutation UserUnlikedTopic($topics_pk: uuid!, $users_pk: String!) {
       delete_topics_users_likes_association_by_pk(topics_pk: $topics_pk, users_pk: $users_pk) {
         topics_pk
@@ -10,7 +10,7 @@ const UserUnlikedTopic = (topics_pk: string, users_pk: string) => {
     }
   `;
 
-  const [userUnlikedTopic, { error: unlikedError }] = useMutation(createTopicQuery, {
+  const [userUnlikedTopic, { error: unlikedError }] = useMutation(userUnlikedQuery, {
     variables: { topics_pk, users_pk },
     refetchQueries: [],
     optimisticResponse: {

@@ -18,8 +18,8 @@ const CreateTopic = () => {
           department: $department
           description: $description
           author_details: {
-            data: { id: $author_id, name: $author_name }
-            on_conflict: { constraint: users_pkey, update_columns: name }
+            data: { id: $author_id, name: $author_name, email: $author_email }
+            on_conflict: { constraint: users_pkey, update_columns: [name, email }
           }
           link: $link
           short_description: $short_description

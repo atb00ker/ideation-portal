@@ -2,15 +2,20 @@ import { ApolloCache, gql, useMutation } from '@apollo/client';
 import { GET_TOPIC_BY_PK } from './GetTopicByPk';
 // import { updateTopicOnMutate } from './GetTopicsCollection';
 
-const UserLikedTopic = (topics_pk: string, users_pk: string, user_name: string) => {
-  const createTopicQuery = gql`
-    mutation UserLikedTopic($topics_pk: uuid!, $users_pk: String!, $user_name: String!) {
+const UserLikedTopic = (topics_pk: string, users_pk: string, user_name: string, user_email: string) => {
+  const userLikedQuery = gql`
+    mutation UserLikedTopic(
+      $topics_pk: uuid!
+      $users_pk: String!
+      $user_name: String!
+      $user_email: String!
+    ) {
       insert_topics_users_likes_association_one(
         object: {
           topics_pk: $topics_pk
           user: {
-            data: { id: $users_pk, name: $user_name }
-            on_conflict: { constraint: users_pkey, update_columns: name }
+            data: { id: $users_pk, name: $user_name, email: $user_email }
+            on_conflict: { constraint: users_pkey, update_columns: [name, email] }
           }
         }
       ) {
@@ -19,8 +24,8 @@ const UserLikedTopic = (topics_pk: string, users_pk: string, user_name: string) 
     }
   `;
 
-  const [userLikedTopic, { error: likedError }] = useMutation(createTopicQuery, {
-    variables: { topics_pk, users_pk, user_name },
+  const [userLikedTopic, { error: likedError }] = useMutation(userLikedQuery, {
+    variables: { topics_pk, users_pk, user_name, user_email },
     refetchQueries: [],
     optimisticResponse: {
       insert_topics_users_likes_association_one: {

@@ -51,15 +51,7 @@ update_permissions:
     check:
       author:
         _eq: X-Hasura-User-Id
-    columns:
-    - author
-    - category
-    - department
-    - description
-    - link
-    - short_description
-    - status
-    - title
+    columns: []
     filter:
       author:
         _eq: X-Hasura-User-Id
