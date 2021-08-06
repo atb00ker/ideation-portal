@@ -12,25 +12,19 @@ import { IAuth } from '../../interfaces/IAuth';
 import { TopicCategory } from '../../enums/TopicCategory';
 import { TopicDepartment } from '../../enums/TopicDepartment';
 import DiscardModal from '../../components/Popups/DiscardModal';
-import CreateTopicExistingUser from '../../components/GraphQL/CreateTopicExistingUser';
-import CheckUserExists from '../../components/GraphQL/CheckUserExists';
 import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
-import CreateTopicNewUser from '../../components/GraphQL/CreateTopicNewUser';
+import CreateTopic from '../../components/GraphQL/CreateTopic';
 
 const TopicAdd = () => {
-  let userExists = false;
   const auth: IAuth = useContext(AuthContext);
   const history = useHistory();
   const [showDiscard, setShowDiscard] = useState(false);
   const [validated, setValidated] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState(false);
-  const { data: userData, loading: userLoading, error: userError } = CheckUserExists(auth.user.id || '');
-  const { createTopicNewUser, newUserMutationLoading, newUserMutationError } = CreateTopicNewUser();
-  const { createTopicExistingUser, existingUserMutationLoading, existingUserMutationError } =
-    CreateTopicExistingUser();
+  const { createTopic, createTopicLoading, createTopicError } = CreateTopic();
 
   const handleAddFormSubmit = (event: any) => {
     const form = event.currentTarget;
@@ -50,40 +44,27 @@ const TopicAdd = () => {
         short_description: formShortDescription,
         title: form.elements.topicTitle.value,
       };
+      const userValues = {
+        author_id: auth.user.id,
+        author_name: auth.user.name,
+      };
 
-      if (userExists) {
-        const userValues = { author: auth.user.id };
-        createTopicExistingUser({ variables: { ...formValues, ...userValues } })
-          .then(_ => history.push('/'))
-          .catch(_ => {
-            setLoading(false);
-            setError(true);
-          });
-      } else {
-        const userValues = {
-          author_id: auth.user.id,
-          author_name: auth.user.name,
-        };
-        createTopicNewUser({ variables: { ...formValues, ...userValues } })
-          .then(_ => history.push('/'))
-          .catch(_ => {
-            setLoading(false);
-            setError(true);
-          });
-      }
+      createTopic({ variables: { ...formValues, ...userValues } })
+        .then(_ => history.push('/'))
+        .catch(_ => {
+          setLoading(false);
+          setError(true);
+        });
     }
     setValidated(true);
   };
 
-  if (loading || userLoading || existingUserMutationLoading || newUserMutationLoading)
-    return <SectionLoader height='500px' width='100%' />;
+  if (loading || createTopicLoading) return <SectionLoader height='500px' width='100%' />;
 
-  if (error || userError || newUserMutationError || existingUserMutationError) {
-    console.error(error, userError, newUserMutationError, existingUserMutationError);
+  if (error || createTopicError) {
+    console.error(error, createTopicError);
     return <ServerRequestError height='500px' imgHeight='250px' width='100%' />;
   }
-
-  if (userData.users_by_pk) userExists = true;
 
   return (
     <React.Fragment>

@@ -1,6 +1,13 @@
 table:
   name: topics_users_likes_association
   schema: public
+object_relationships:
+- name: topic
+  using:
+    foreign_key_constraint_on: topics_pk
+- name: user
+  using:
+    foreign_key_constraint_on: users_pk
 insert_permissions:
 - permission:
     backend_only: false

@@ -24,7 +24,7 @@ const TopicDetails = (props: any) => {
   const history = useHistory();
   const topics_pk = props.match.params.uuid;
   const users_pk = auth.user.id || '';
-  const { userLikedTopic } = UserLikedTopic(topics_pk, users_pk);
+  const { userLikedTopic } = UserLikedTopic(topics_pk, users_pk, auth.user?.name || '');
   const { userUnlikedTopic } = UserUnlikedTopic(topics_pk, users_pk);
   const { changeTopicStep } = ChangeTopicStep(topics_pk, users_pk);
   const { loading: topicLoading, data: topicData, error: topicError } = GetTopicByPk(topics_pk, users_pk);
@@ -163,46 +163,50 @@ const TopicDetails = (props: any) => {
                 </svg>
               </Button>
             )}
-            <Button
-              onClick={() => handleChangeStep(-1)}
-              disabled={topicData.topics_by_pk.status <= 0}
-              variant='outline-primary'
-              className='btn-sm me-2'>
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='16'
-                height='16'
-                style={{ transform: 'translateY(-1px)' }}
-                fill='currentColor'
-                className='bi bi-chevron-left'
-                viewBox='0 0 16 16'>
-                <path
-                  fillRule='evenodd'
-                  d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
-                />
-              </svg>{' '}
-              Previous Step
-            </Button>
-            <Button
-              onClick={() => handleChangeStep(1)}
-              disabled={topicData.topics_by_pk.status >= Object.keys(TopicStatus).length - 1}
-              variant='outline-primary'
-              className='btn-sm me-2'>
-              Next Step{' '}
-              <svg
-                xmlns='http://www.w3.org/2000/svg'
-                width='16'
-                height='16'
-                fill='currentColor'
-                style={{ transform: 'translateY(-1px)' }}
-                className='bi bi-chevron-right'
-                viewBox='0 0 16 16'>
-                <path
-                  fillRule='evenodd'
-                  d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
-                />
-              </svg>
-            </Button>
+            {auth.user.id == topicData.topics_by_pk.author_details.id && (
+              <>
+                <Button
+                  onClick={() => handleChangeStep(-1)}
+                  disabled={topicData.topics_by_pk.status <= 0}
+                  variant='outline-primary'
+                  className='btn-sm me-2'>
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    style={{ transform: 'translateY(-1px)' }}
+                    fill='currentColor'
+                    className='bi bi-chevron-left'
+                    viewBox='0 0 16 16'>
+                    <path
+                      fillRule='evenodd'
+                      d='M11.354 1.646a.5.5 0 0 1 0 .708L5.707 8l5.647 5.646a.5.5 0 0 1-.708.708l-6-6a.5.5 0 0 1 0-.708l6-6a.5.5 0 0 1 .708 0z'
+                    />
+                  </svg>{' '}
+                  Previous Step
+                </Button>
+                <Button
+                  onClick={() => handleChangeStep(1)}
+                  disabled={topicData.topics_by_pk.status >= Object.keys(TopicStatus).length - 1}
+                  variant='outline-primary'
+                  className='btn-sm me-2'>
+                  Next Step{' '}
+                  <svg
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    fill='currentColor'
+                    style={{ transform: 'translateY(-1px)' }}
+                    className='bi bi-chevron-right'
+                    viewBox='0 0 16 16'>
+                    <path
+                      fillRule='evenodd'
+                      d='M4.646 1.646a.5.5 0 0 1 .708 0l6 6a.5.5 0 0 1 0 .708l-6 6a.5.5 0 0 1-.708-.708L10.293 8 4.646 2.354a.5.5 0 0 1 0-.708z'
+                    />
+                  </svg>
+                </Button>
+              </>
+            )}
           </Col>
         </Row>
       </Container>

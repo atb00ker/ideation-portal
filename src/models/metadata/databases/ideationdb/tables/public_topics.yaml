@@ -35,7 +35,6 @@ select_permissions:
     columns:
     - category
     - department
-    - likes
     - status
     - author
     - description

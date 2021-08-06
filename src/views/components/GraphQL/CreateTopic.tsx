@@ -1,6 +1,6 @@
 import { gql, useMutation } from '@apollo/client';
 
-const CreateTopicNewUser = () => {
+const CreateTopic = () => {
   const createTopicQuery = gql`
     mutation CreateTopic(
       $category: Int!
@@ -17,7 +17,10 @@ const CreateTopicNewUser = () => {
           category: $category
           department: $department
           description: $description
-          author_details: { data: { id: $author_id, name: $author_name } }
+          author_details: {
+            data: { id: $author_id, name: $author_name }
+            on_conflict: { constraint: users_pkey, update_columns: name }
+          }
           link: $link
           short_description: $short_description
           title: $title
@@ -27,10 +30,11 @@ const CreateTopicNewUser = () => {
       }
     }
   `;
-  const [createTopicNewUser, { loading: newUserMutationLoading, error: newUserMutationError }] =
+
+  const [createTopic, { loading: createTopicLoading, error: createTopicError }] =
     useMutation(createTopicQuery);
 
-  return { createTopicNewUser, newUserMutationLoading, newUserMutationError };
+  return { createTopic, createTopicLoading, createTopicError };
 };
 
-export default CreateTopicNewUser;
+export default CreateTopic;
