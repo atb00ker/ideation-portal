@@ -2,7 +2,7 @@ import React from 'react';
 import ReactDOM from 'react-dom';
 import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
-import ApolloProvider from './components/GraphQL/ApolloProvider';
+import ApolloProvider from './components/ApolloProvider/ApolloProvider';
 import AuthProvider from './components/Auth/AuthProvider';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';

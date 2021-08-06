@@ -15,7 +15,7 @@ import DiscardModal from '../../components/Popups/DiscardModal';
 import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
-import CreateTopic from '../../components/GraphQL/CreateTopic';
+import CreateTopic from '../../graphql/CreateTopic';
 
 const TopicAdd = () => {
   const auth: IAuth = useContext(AuthContext);

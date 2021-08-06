@@ -1,5 +1,5 @@
 import { useQuery, gql } from '@apollo/client';
-import { IGetTopicCollectionInput } from '../../interfaces/IGetTopicCollectionInput';
+import { IGetTopicCollectionInput } from '../interfaces/IGetTopicCollectionInput';
 
 const GetTopicsCollection = ({
   limit,

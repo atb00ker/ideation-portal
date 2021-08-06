@@ -7,7 +7,7 @@ import { ErrorBoundary } from 'react-error-boundary';
 
 import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
 import TopicsCollection from '../../components/TopicsCollection/TopicsCollection';
-import GetTopicsCollection from '../../components/GraphQL/GetTopicsCollection';
+import GetTopicsCollection from '../../graphql/GetTopicsCollection';
 import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import NoRecordsFound from '../../components/ContentState/NoRecordsFound';

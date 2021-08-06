@@ -11,16 +11,16 @@ import { useHistory } from 'react-router-dom';
 
 import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
-import GetTopicByPk from '../../components/GraphQL/GetTopicByPk';
+import GetTopicByPk from '../../graphql/GetTopicByPk';
 import { TopicStatus } from '../../enums/TopicStatus';
 import { getTopicCategoryById } from '../../enums/TopicCategory';
 import { getDepartmentById } from '../../enums/TopicDepartment';
 import { IAuth } from '../../interfaces/IAuth';
 import { AuthContext } from '../../components/Auth/AuthProvider';
-import UserLikedTopic from '../../components/GraphQL/UserLikedTopic';
-import UserUnlikedTopic from '../../components/GraphQL/UserUnlikedTopic';
-import ChangeTopicStep from '../../components/GraphQL/ChangeTopicStep';
-import CreateComment from '../../components/GraphQL/CreateComment';
+import UserLikedTopic from '../../graphql/UserLikedTopic';
+import UserUnlikedTopic from '../../graphql/UserUnlikedTopic';
+import ChangeTopicStep from '../../graphql/ChangeTopicStep';
+import CreateComment from '../../graphql/CreateComment';
 import './topic-details.scss';
 
 const TopicDetails = (props: any) => {
