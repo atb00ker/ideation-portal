@@ -8,6 +8,7 @@ import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
 import TopicAdd from './pages/TopicAdd/TopicAdd';
 import TopicDetails from './pages/TopicDetails/TopicDetails';
+import Reports from './pages/Reports/Reports';
 import './index.scss';
 
 const App = () => {
@@ -19,6 +20,7 @@ const App = () => {
           <Switch>
             <Route path='/topic/:uuid' render={props => <TopicDetails {...props} />} />
             <Route path='/topic/' component={TopicAdd} />
+            <Route path='/reports/' component={Reports} />
             <Route exact path='/' component={Home} />
           </Switch>
         </Router>

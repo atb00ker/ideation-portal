@@ -1,13 +1,18 @@
-import React from 'react';
+import React, { useContext, useMemo, useState } from 'react';
 import { default as BootstrapNav } from 'react-bootstrap/Navbar';
 import Container from 'react-bootstrap/Container';
 import Button from 'react-bootstrap/Button';
 
 import { AuthContext } from '../Auth/AuthProvider';
 import { IAuth } from '../../interfaces/IAuth';
+import { Link } from 'react-router-dom';
+import { RouterPath } from '../../enums/RouterPath';
+import UpdatePageVisited from '../../graphql/UpdatePageVisited';
 
 const Navbar = () => {
-  const auth: IAuth = React.useContext(AuthContext);
+  const auth: IAuth = useContext(AuthContext);
+  const { updatePageVisited } = UpdatePageVisited();
+  useState(() => updatePageVisited());
 
   return (
     <React.Fragment>
@@ -16,6 +21,16 @@ const Navbar = () => {
           <BootstrapNav.Brand href='#home'>Ideation Portal</BootstrapNav.Brand>
           <BootstrapNav.Toggle aria-controls='navbar-toggle' />
           <BootstrapNav.Collapse id='navbar-toggle'>
+            <Link to={RouterPath.Home}>
+              <Button className='m-1 btn-sm' variant='primary'>
+                Home
+              </Button>
+            </Link>
+            <Link to={RouterPath.Reports}>
+              <Button className='m-1 btn-sm' variant='primary'>
+                Reports
+              </Button>
+            </Link>
             <div style={{ flex: '1 1 auto' }}></div>
             {!auth.isReady && (
               <Button

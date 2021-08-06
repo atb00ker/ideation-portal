@@ -14,5 +14,5 @@ export const TopicCategory: {
 };
 
 export const getTopicCategoryById = (id: number) => {
-  return TopicCategory[Object.keys(TopicCategory)[id]].name;
+  return TopicCategory[Object.keys(TopicCategory)[id]];
 };

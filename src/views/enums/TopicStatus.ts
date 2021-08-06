@@ -20,3 +20,7 @@ export const TopicStatus: { [key: string]: { id: number; name: string } } = {
     name: 'Completed',
   },
 };
+
+export const getTopicStatusById = (id: number) => {
+  return TopicStatus[Object.keys(TopicStatus)[id]];
+};

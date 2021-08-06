@@ -9,6 +9,6 @@ export const TopicDepartment: { [key: string]: { id: number; name: string } } = 
   },
 };
 
-export const getDepartmentById = (id: number) => {
-  return TopicDepartment[Object.keys(TopicDepartment)[id]].name;
+export const getTopicDepartmentById = (id: number) => {
+  return TopicDepartment[Object.keys(TopicDepartment)[id]];
 };

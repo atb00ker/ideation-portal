@@ -1,0 +1,10 @@
+table:
+  name: topics_count_by_department
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - department
+    - count
+    filter: {}
+  role: user

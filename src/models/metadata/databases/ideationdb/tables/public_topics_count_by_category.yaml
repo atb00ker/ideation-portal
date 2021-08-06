@@ -1,0 +1,10 @@
+table:
+  name: topics_count_by_category
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - category
+    - count
+    filter: {}
+  role: user

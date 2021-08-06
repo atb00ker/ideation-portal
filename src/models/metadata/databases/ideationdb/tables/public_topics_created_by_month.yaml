@@ -1,0 +1,10 @@
+table:
+  name: topics_created_by_month
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - month
+    - topics_created
+    filter: {}
+  role: user

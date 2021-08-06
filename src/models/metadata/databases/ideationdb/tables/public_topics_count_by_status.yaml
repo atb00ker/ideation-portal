@@ -1,0 +1,10 @@
+table:
+  name: topics_count_by_status
+  schema: public
+select_permissions:
+- permission:
+    columns:
+    - status
+    - count
+    filter: {}
+  role: user

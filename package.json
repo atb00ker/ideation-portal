@@ -7,7 +7,7 @@
   "description": "Ideation portal for companies to collect ideas from bottom-up.",
   "scripts": {
     "docker": "docker-compose up -d",
-    "metadata": "hasura metadata apply --log-level=DEBUG",
+    "metadata-apply": "hasura metadata apply --log-level=DEBUG",
     "metadata-export": "hasura metadata export --log-level=DEBUG",
     "metadata-reload": "hasura metadata reload --log-level=DEBUG",
     "migrate": "hasura migrate apply --log-level=DEBUG --all-databases",
@@ -75,6 +75,7 @@
     "react-bootstrap": "^2.0.0-beta.4",
     "react-dom": "^16.8.0",
     "react-error-boundary": "^3.1.3",
+    "react-google-charts": "^2.0.29",
     "react-router-dom": "^5.2.0",
     "react-test-renderer": "^16.8.0",
     "react-use-websocket": "^2.7.1",

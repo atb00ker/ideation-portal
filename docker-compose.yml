@@ -39,6 +39,12 @@ services:
     env_file:
       - .env
 
+  # adminer:
+  #   image: adminer
+  #   restart: always
+  #   ports:
+  #     - 9080:8080
+
 volumes:
   postgres_data: {}
 

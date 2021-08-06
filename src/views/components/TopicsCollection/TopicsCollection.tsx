@@ -5,11 +5,12 @@ import Stepper from '@material-ui/core/Stepper';
 import Step from '@material-ui/core/Step';
 import StepLabel from '@material-ui/core/StepLabel';
 import { Link } from 'react-router-dom';
-import './topics-collection.scss';
+
 import { TopicStatus } from '../../enums/TopicStatus';
 import { getTopicCategoryById } from '../../enums/TopicCategory';
-import { getDepartmentById } from '../../enums/TopicDepartment';
+import { getTopicDepartmentById } from '../../enums/TopicDepartment';
 import { RouterPath } from '../../enums/RouterPath';
+import './topics-collection.scss';
 
 const TopicsCollection: React.FC<any> = ({ topics }) => {
   const [showStepNames, setShowStepNames] = useState(true);
@@ -32,10 +33,10 @@ const TopicsCollection: React.FC<any> = ({ topics }) => {
             <Card.Title>{topic.title}</Card.Title>
             <Card.Subtitle className='pt-1 mb-2'>
               <Badge bg='primary' className='me-1'>
-                {` ${getTopicCategoryById(topic.category)} `}
+                {` ${getTopicCategoryById(topic.category).name} `}
               </Badge>
               <Badge bg='success' className='me-1'>
-                {` ${getDepartmentById(topic.department)} `}
+                {` ${getTopicDepartmentById(topic.department).name} `}
               </Badge>
               <Badge bg='secondary'>
                 {` ${topic.topics_users_likes_associations_aggregate.aggregate.count} `} likes
