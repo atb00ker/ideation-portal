@@ -1,7 +1,7 @@
 /**************************
 * Dependencies
 **************************/
-@import "bootstrap/scss/bootstrap";
+@import 'bootstrap/scss/bootstrap';
 
 /**************************
 * Global Styles
@@ -20,11 +20,14 @@ select {
   -webkit-appearance: none;
   -moz-appearance: none;
   text-indent: 1px;
-  text-overflow: "";
+  text-overflow: '';
 }
 
 .max-width-960 {
   max-width: 960px;
+}
+.max-width-720 {
+  max-width: 720px;
 }
 
 .button-action-bar {

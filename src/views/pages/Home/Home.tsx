@@ -18,7 +18,7 @@ import { TopicStatus } from '../../enums/TopicStatus';
 import { IGetTopicCollectionInput } from '../../interfaces/IGetTopicCollectionInput';
 
 const Home = () => {
-  let pageSize = 5;
+  let pageSize = parseInt(process.env.HOME_RECORDS_PAGE_SIZE || '5');
   const [pageActive, setPageActive] = useState(0);
   const [pageCount, setPageCount] = useState(1);
   const [searchFilter, setSearchFilter] = useState('');

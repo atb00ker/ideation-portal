@@ -27,8 +27,8 @@ const TopicAdd = () => {
   const { createTopic, createTopicLoading, createTopicError } = CreateTopic();
 
   const handleAddFormSubmit = (event: any) => {
-    const form = event.currentTarget;
     event.preventDefault();
+    const form = event.currentTarget;
     if (form.checkValidity() === false) {
       event.stopPropagation();
     } else {

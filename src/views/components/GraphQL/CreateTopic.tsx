@@ -2,31 +2,25 @@ import { gql, useMutation } from '@apollo/client';
 
 const CreateTopic = () => {
   const createTopicQuery = gql`
-    mutation CreateTopic(
-      $category: Int!
-      $department: Int!
-      $description: String!
-      $link: String
-      $short_description: String!
-      $title: String!
-      $author_id: String!
-      $author_name: String!
+    mutation CreateComment(
+      $comment: String!
+      $topics_pk: uuid!
+      $users_pk: String!
+      $users_name: String!
+      $users_email: String!
     ) {
-      insert_topics_one(
+      insert_topics_users_comments_association_one(
         object: {
-          category: $category
-          department: $department
-          description: $description
-          author_details: {
-            data: { id: $author_id, name: $author_name, email: $author_email }
-            on_conflict: { constraint: users_pkey, update_columns: [name, email }
+          comment: $comment
+          topics_pk: $topics_pk
+          user: {
+            data: { email: $users_email, id: $users_pk, name: $users_name }
+            on_conflict: { constraint: users_pkey, update_columns: [name, email] }
           }
-          link: $link
-          short_description: $short_description
-          title: $title
         }
       ) {
         id
+        comment
       }
     }
   `;

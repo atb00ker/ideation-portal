@@ -4,6 +4,8 @@ import Col from 'react-bootstrap/Col';
 import Row from 'react-bootstrap/Row';
 import Button from 'react-bootstrap/Button';
 import Badge from 'react-bootstrap/Badge';
+import Form from 'react-bootstrap/Form';
+import Card from 'react-bootstrap/Card';
 import { Step, StepLabel, Stepper } from '@material-ui/core';
 import { useHistory } from 'react-router-dom';
 
@@ -18,20 +20,20 @@ import { AuthContext } from '../../components/Auth/AuthProvider';
 import UserLikedTopic from '../../components/GraphQL/UserLikedTopic';
 import UserUnlikedTopic from '../../components/GraphQL/UserUnlikedTopic';
 import ChangeTopicStep from '../../components/GraphQL/ChangeTopicStep';
+import CreateComment from '../../components/GraphQL/CreateComment';
+import './topic-details.scss';
 
 const TopicDetails = (props: any) => {
   const auth: IAuth = useContext(AuthContext);
   const history = useHistory();
   const topics_pk = props.match.params.uuid;
   const users_pk = auth.user.id || '';
-  const { userLikedTopic } = UserLikedTopic(
-    topics_pk,
-    users_pk,
-    auth.user?.name || '',
-    auth.user?.email || '',
-  );
+  const users_name = auth.user?.name || '';
+  const users_email = auth.user?.email || '';
+  const { userLikedTopic } = UserLikedTopic(topics_pk, users_pk, users_name, users_email);
   const { userUnlikedTopic } = UserUnlikedTopic(topics_pk, users_pk);
   const { changeTopicStep } = ChangeTopicStep(topics_pk, users_pk);
+  const { createComment } = CreateComment(topics_pk, users_pk, users_name);
   const { loading: topicLoading, data: topicData, error: topicError } = GetTopicByPk(topics_pk, users_pk);
   const dateFormatOptions: Intl.DateTimeFormatOptions = {
     year: 'numeric',
@@ -47,6 +49,25 @@ const TopicDetails = (props: any) => {
         },
       },
     }).catch(error => console.error(error));
+  };
+
+  const handleAddComment = (event: any) => {
+    event.preventDefault();
+    const form = event.currentTarget;
+    const newComment = form.elements.namedItem('comment-input').value || '';
+    createComment({
+      variables: { topics_pk, users_pk, users_name, users_email, comment: newComment },
+      optimisticResponse: {
+        insert_topics_users_comments_association_one: {
+          id: -1,
+          comment: newComment,
+        },
+      },
+    })
+      .then(() => form.reset())
+      .catch(error => {
+        console.log(error);
+      });
   };
 
   if (topicLoading) return <SectionLoader height='500px' width='100%' />;
@@ -105,20 +126,22 @@ const TopicDetails = (props: any) => {
               Department : {` ${getDepartmentById(topicData.topics_by_pk.department)} `}
             </Badge>
             <Badge bg='danger' className='me-1'>
-              Author : {` ${topicData.topics_by_pk.author_details.name} `}
+              Author :{' '}
+              {` ${topicData.topics_by_pk.author_details.name} <${topicData.topics_by_pk.author_details.email}> `}
             </Badge>
             <Badge bg='info' className='me-1'>
               Last updated :{' '}
               {new Date(topicData.topics_by_pk.updated_at).toLocaleDateString('en-US', dateFormatOptions)}
             </Badge>
           </Col>
-          <Col xs={12} className='mb-5 m-auto max-width-960'>
+          <Col xs={12} className='mb-5 m-auto d-lg-inline-flex max-width-960'>
             <Button
               onClick={() => {
                 history.push('/');
               }}
+              style={{ minWidth: '70px' }}
               variant='outline-primary'
-              className='btn-sm me-2'>
+              className='btn-sm me-2 mb-2 buttons-height'>
               <svg
                 xmlns='http://www.w3.org/2000/svg'
                 width='16'
@@ -134,11 +157,44 @@ const TopicDetails = (props: any) => {
               {'  '}
               Back
             </Button>
+
+            <Form onSubmit={event => handleAddComment(event)}>
+              <Form.Group className='d-flex mb-2'>
+                <Form.Control
+                  required
+                  as='textarea'
+                  className='buttons-height'
+                  style={{ minWidth: '400px' }}
+                  id='comment-input'
+                  type='text'
+                  placeholder='Comment'
+                />
+                <Button
+                  id='comment-input-submit'
+                  type='submit'
+                  style={{ minWidth: '32px' }}
+                  aria-label='Click to add comment'
+                  title='Click to add comment'>
+                  <svg
+                    id='comment-input-icon'
+                    xmlns='http://www.w3.org/2000/svg'
+                    width='16'
+                    height='16'
+                    fill='currentColor'
+                    className='bi bi-arrow-right-circle-fill'
+                    viewBox='0 0 16 16'>
+                    <path d='M8 0a8 8 0 1 1 0 16A8 8 0 0 1 8 0zM4.5 7.5a.5.5 0 0 0 0 1h5.793l-2.147 2.146a.5.5 0 0 0 .708.708l3-3a.5.5 0 0 0 0-.708l-3-3a.5.5 0 1 0-.708.708L10.293 7.5H4.5z' />
+                  </svg>
+                </Button>
+              </Form.Group>
+            </Form>
+
             {!!userLiked && (
               <Button
                 onClick={() => userUnlikedTopic().catch(error => console.error(error))}
                 variant='danger'
-                className='btn-sm me-2'>
+                style={{ minWidth: '50px' }}
+                className='btn-sm me-2 mb-2 buttons-height'>
                 {` ${topicData.topics_by_pk.totalLikes.aggregate.count} `}{' '}
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -155,7 +211,8 @@ const TopicDetails = (props: any) => {
               <Button
                 onClick={() => userLikedTopic().catch(error => console.error(error))}
                 variant='outline-danger'
-                className='btn-sm me-2'>
+                style={{ minWidth: '50px' }}
+                className='btn-sm me-2 mb-2 buttons-height'>
                 {` ${topicData.topics_by_pk.totalLikes.aggregate.count} `}{' '}
                 <svg
                   xmlns='http://www.w3.org/2000/svg'
@@ -174,7 +231,8 @@ const TopicDetails = (props: any) => {
                   onClick={() => handleChangeStep(-1)}
                   disabled={topicData.topics_by_pk.status <= 0}
                   variant='outline-primary'
-                  className='btn-sm me-2'>
+                  style={{ minWidth: '130px' }}
+                  className='btn-sm me-2 mb-2 buttons-height'>
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
                     width='16'
@@ -194,7 +252,8 @@ const TopicDetails = (props: any) => {
                   onClick={() => handleChangeStep(1)}
                   disabled={topicData.topics_by_pk.status >= Object.keys(TopicStatus).length - 1}
                   variant='outline-primary'
-                  className='btn-sm me-2'>
+                  style={{ minWidth: '100px' }}
+                  className='btn-sm me-2 mb-2 buttons-height'>
                   Next Step{' '}
                   <svg
                     xmlns='http://www.w3.org/2000/svg'
@@ -212,6 +271,21 @@ const TopicDetails = (props: any) => {
                 </Button>
               </>
             )}
+          </Col>
+          <Col xs={12} className='mb-3 m-auto max-width-720'>
+            {topicData.topics_by_pk.comments.map((comment: any) => {
+              return (
+                <Card key={comment.id} className='m-2'>
+                  <Card.Body>
+                    {comment.comment}
+                    <br />
+                    <div style={{ textAlign: 'end', marginRight: '10px' }}>
+                      <small className='mt-1 text-muted'>— {comment.user.name}</small>
+                    </div>
+                  </Card.Body>
+                </Card>
+              );
+            })}
           </Col>
         </Row>
       </Container>
