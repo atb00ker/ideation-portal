@@ -1,6 +1,12 @@
-actions: []
+actions:
+- name: GetExcel
+  definition:
+    kind: ""
+    handler: http://{{ACTION_BASE_URL}}/excel
 custom_types:
   enums: []
   input_objects: []
-  objects: []
+  objects:
+  - name: GetReportOutput
+  - name: GetExcelOutput
   scalars: []

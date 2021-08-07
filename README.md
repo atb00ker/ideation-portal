@@ -8,7 +8,6 @@ Ideation portal for companies to create a repository of ideas.
 - npm | yarn
 - docker
 - docker-compose
-- hasura-cli
 
 ## Features
 

@@ -1,0 +1,12 @@
+type Query {
+  GetExcel : GetExcelOutput
+}
+
+type GetReportOutput {
+  site_visitors : bigint!
+}
+
+type GetExcelOutput {
+  excel_link : String
+}
+
