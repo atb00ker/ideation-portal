@@ -47,10 +47,7 @@ const Navbar = () => {
               </Button>
             )}
             {auth.isReady && auth.isAuthenticated && (
-              <Button
-                className='m-1 me-4 btn-sm'
-                variant='danger'
-                onClick={() => auth.logout({ returnTo: window.location.origin })}>
+              <Button className='m-1 me-4 btn-sm' variant='danger' onClick={() => auth.logout()}>
                 Logout
               </Button>
             )}

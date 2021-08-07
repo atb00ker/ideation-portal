@@ -174,7 +174,7 @@ const TopicAdd = () => {
                   <Col sm='10'>
                     <Form.Control
                       as='textarea'
-                      maxLength={50}
+                      maxLength={240}
                       rows={2}
                       placeholder='Enter a short description (Optional)'
                     />

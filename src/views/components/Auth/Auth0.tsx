@@ -8,7 +8,7 @@ export const Provider = Auth0Provider;
 export const ProviderOptions: Auth0ProviderOptions = {
   domain: process.env.AUTH0_DOMAIN || '',
   clientId: process.env.AUTH0_CLIENT_ID || '',
-  redirectUri: window.location.origin,
+  redirectUri: process.env.AUTH0_REDIRECT_URI || window.location.origin,
   cacheLocation: 'localstorage',
 };
 const AuthConfigurations: React.FC = ({ children }) => {
@@ -17,6 +17,10 @@ const AuthConfigurations: React.FC = ({ children }) => {
   if (!isLoading && !isAuthenticated) {
     loginWithRedirect();
   }
+
+  const auth0Logout = () => {
+    return logout({ returnTo: process.env.AUTH0_LOGOUT_URI || window.location.origin });
+  };
 
   const getJwt = async (): Promise<string> => {
     if (isAuthenticated) {
@@ -28,7 +32,7 @@ const AuthConfigurations: React.FC = ({ children }) => {
 
   const auth: IAuth = {
     loginWithRedirect: loginWithRedirect,
-    logout: logout,
+    logout: auth0Logout,
     isAuthenticated: isAuthenticated,
     isReady: !isLoading,
     user: {

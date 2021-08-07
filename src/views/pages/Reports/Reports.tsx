@@ -37,7 +37,7 @@ const Reports = () => {
         </Col>
         <Col className='text-center' xs={3}>
           <h1 className='display-1'>
-            {!reportData.topics_count_by_status
+            {reportData.topics_count_by_status
               ? reportData.topics_count_by_status
                   .filter((record: any) => {
                     // For all statuses, except the first (proposed) and last (completed), get the id.
@@ -49,7 +49,7 @@ const Reports = () => {
                   })
                   ?.reduce(
                     (totalSum: any, currentRecord: any) => {
-                      return currentRecord.count + totalSum.count;
+                      return (currentRecord?.count || 0) + (totalSum?.count || 0);
                     },
                     { count: 0 },
                   ) || 0

@@ -57,6 +57,7 @@ const TopicDetails = (props: any) => {
     event.preventDefault();
     const form = event.currentTarget;
     const newComment = form.elements.namedItem('comment-input').value || '';
+    form.reset();
     createComment({
       variables: { topics_pk, users_pk, users_name, users_email, comment: newComment },
       optimisticResponse: {
@@ -65,11 +66,10 @@ const TopicDetails = (props: any) => {
           comment: newComment,
         },
       },
-    })
-      .then(() => form.reset())
-      .catch(error => {
-        console.log(error);
-      });
+    }).catch(error => {
+      form.elements.namedItem('comment-input').value = newComment;
+      console.log(error);
+    });
   };
 
   if (topicLoading) return <SectionLoader height='500px' width='100%' />;
