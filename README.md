@@ -1,5 +1,9 @@
 # Ideation Portal
 
+![GitHub Workflow Status](https://img.shields.io/github/workflow/status/atb00ker/ideation-portal/CI%20Tests)
+![License](https://img.shields.io/github/license/atb00ker/ideation-portal)
+![Stack](https://img.shields.io/static/v1?label=stack&message=go-hasura-react&color=green)
+
 Ideation portal for companies to create a repository of ideas.
 
 ## Pre-requisites
