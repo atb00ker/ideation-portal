@@ -1,0 +1,25 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Report page tests report snapshot structure 1`] = `
+<div
+  className="position-relative"
+  style={
+    Object {
+      "height": "500px",
+      "width": "100%",
+    }
+  }
+>
+  <div
+    className="round-loader-center position-absolute spinner-border"
+    role="status"
+  >
+    <span
+      className="visually-hidden"
+      data-testid="section-loading"
+    >
+      Loading...
+    </span>
+  </div>
+</div>
+`;

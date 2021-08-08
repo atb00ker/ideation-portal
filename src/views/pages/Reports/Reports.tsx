@@ -82,13 +82,13 @@ const Reports = () => {
           Total Visits
         </Col>
         <Col className='text-center' xs={3}>
-          <h1 className='display-1'>
+          <h1 data-testid="reports-proposed-topics" className='display-1'>
             {reportData.topics_count_by_status.find((record: any) => record.status === 0)?.count || 0}
           </h1>
           New Ideas
         </Col>
         <Col className='text-center' xs={3}>
-          <h1 className='display-1'>
+          <h1 data-testid="reports-inprogress-topics" className='display-1'>
             {reportData.topics_count_by_status
               ? reportData.topics_count_by_status
                   .filter((record: any) => {
@@ -107,7 +107,7 @@ const Reports = () => {
           Tasks in Progress
         </Col>
         <Col className='text-center' xs={3}>
-          <h1 className='display-1'>
+          <h1 data-testid="reports-completed-topics" className='display-1'>
             {reportData.topics_count_by_status.find(
               (record: any) => record.status === Object.keys(TopicStatus).length - 1,
             )?.count || 0}

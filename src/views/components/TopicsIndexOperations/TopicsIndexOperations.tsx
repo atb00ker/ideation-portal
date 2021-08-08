@@ -38,7 +38,7 @@ const TopicsIndexOperations: React.FC<ITopicsIndexOperations> = ({
         <Col xs={12}>
           <Row className='m-auto max-width-960'>
             <ErrorBoundary FallbackComponent={ErrorFallback}>
-              <Col className='ps-0' sm={10} md={11}>
+              <Col data-testid='home-top-message' className='ps-0' sm={10} md={11}>
                 Do you have an Idea to share? A challenge your team is facing? We want to hear about it!
                 Please click the 'add' button to share.
               </Col>
@@ -59,7 +59,12 @@ const TopicsIndexOperations: React.FC<ITopicsIndexOperations> = ({
             <div className='mt-2'>
               <Form onSubmit={event => triggerSearch(event)}>
                 <Form.Group className='mb-3 d-flex'>
-                  <Form.Control id='search-input' type='search' placeholder='Search' />
+                  <Form.Control
+                    data-testid='home-search-box'
+                    id='search-input'
+                    type='search'
+                    placeholder='Search'
+                  />
                   <Button
                     id='search-icon-btn'
                     type='submit'

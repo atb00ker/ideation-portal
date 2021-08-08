@@ -6,7 +6,9 @@ const SectionLoader: React.FC<{ height?: string; width?: string }> = ({ height, 
   return (
     <div className='position-relative' style={{ height: height, width: width }}>
       <Spinner className='round-loader-center position-absolute' animation='border' role='status'>
-        <span className='visually-hidden'>Loading...</span>
+        <span data-testid='section-loading' className='visually-hidden'>
+          Loading...
+        </span>
       </Spinner>
     </div>
   );

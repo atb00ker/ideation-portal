@@ -28,6 +28,7 @@ Thumbs.db
 *.vi
 *~
 .#*
+coverage/
 
 # Docker Ignore
 .git
