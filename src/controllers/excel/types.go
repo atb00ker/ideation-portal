@@ -34,34 +34,17 @@ type graphQLTotalSiteVisitors struct {
 	Site_visitors uint64 `json:"site_visitors"`
 }
 
-type graphQLCategories struct {
-	Categories uint8  `json:"categories"`
-	Count      uint16 `json:"count"`
-}
-
-type graphQLStatuses struct {
-	Status uint8  `json:"status"`
-	Count  uint16 `json:"count"`
-}
-
-type graphQLDepartments struct {
-	Department uint8
-	Count      uint16
-}
 type graphQLTopicsByMonth struct {
-	Month          string
-	Topics_created uint16
+	Month          string `json:"month"`
+	Topics_created uint16 `json:"topics_created"`
 }
 
 type excelRawData struct {
 	Total_site_visitors     graphQLTotalSiteVisitors `json:"total_site_visitors"`
-	Categories              []graphQLCategories
-	Statuses                []graphQLStatuses
-	Departments             []graphQLDepartments
-	Topics_created_by_month []graphQLTopicsByMonth
+	Topics_created_by_month []graphQLTopicsByMonth   `json:"topics_created_by_month"`
 }
 
-type exceRawDataResponse struct {
+type excelRawDataResponse struct {
 	Data   excelRawData   `json:"data,omitempty"`
 	Errors []graphQLError `json:"errors,omitempty"`
 }

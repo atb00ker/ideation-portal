@@ -7,21 +7,23 @@ import (
 	"strconv"
 )
 
+var excelDirName = "dist"
+var excelFileName = "reports.csv"
+
 func getExcelLink(caller *ExcelCaller) (response getExcelOutput, err error) {
 	result, err := caller.Hasura.getExcelRawData()
 	if err != nil {
 		return
 	}
-	var dirName = "dist"
-	var fileName = "reports.csv"
-	_, err = os.Stat(dirName)
+
+	_, err = os.Stat(excelDirName)
 	if os.IsNotExist(err) {
-		if err = os.MkdirAll(dirName, 0755); err != nil {
+		if err = os.MkdirAll(excelDirName, 0755); err != nil {
 			return
 		}
 	}
 
-	file, err := os.Create(fmt.Sprintf("%s/%s", dirName, fileName))
+	file, err := os.Create(fmt.Sprintf("%s/%s", excelDirName, excelFileName))
 	if err != nil {
 		return
 	}
@@ -37,6 +39,6 @@ func getExcelLink(caller *ExcelCaller) (response getExcelOutput, err error) {
 		}
 	}
 
-	response.Excel_link = fileName
+	response.Excel_link = excelFileName
 	return response, err
 }

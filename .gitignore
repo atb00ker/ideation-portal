@@ -1,5 +1,7 @@
 # Configurations
 .env
+.env.test
+.env.dev
 
 # Go Environment
 tmp/

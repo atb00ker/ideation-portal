@@ -58,7 +58,7 @@ func getExcelDataRequest(client httpInterface) (response excelRawData, err error
 		return
 	}
 
-	var hasuraResponse exceRawDataResponse
+	var hasuraResponse excelRawDataResponse
 	if err = json.Unmarshal(respBytes, &hasuraResponse); err != nil {
 		return
 	}
