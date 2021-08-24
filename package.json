@@ -24,7 +24,7 @@
     "react-start": "webpack serve --open --mode development",
     "react-build": "webpack --mode production",
     "react-test": "jest --runInBand --detectOpenHandles",
-    "lint": "prettier --write \"**/*.tsx\" && prettier --write \"**/*.ts\"",
+    "format": "prettier --write \"src/**/*.(js|ts|tsx)\"",
     "gh-pages": "gh-pages -d dist"
   },
   "repository": {
