@@ -32,8 +32,7 @@ const Home: React.FC = () => {
                     data-testid='features-page-button'
                     onClick={() => auth.loginWithRedirect()}
                     className='d-inline'
-                    variant='primary'
-                  >
+                    variant='primary'>
                     Sign Up
                   </Button>
                 )}

@@ -23,7 +23,7 @@ exports[`Home page tests home snapshot structure 1`] = `
           className="pe-0 col-md-1 col-sm-2"
         >
           <a
-            href="#/topic/"
+            href="#/topic/add/"
             onClick={[Function]}
           >
             <button

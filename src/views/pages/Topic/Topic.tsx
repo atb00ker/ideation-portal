@@ -115,8 +115,7 @@ const Topic = () => {
                     <Pagination.Item
                       onClick={() => changePage(index)}
                       key={index}
-                      active={index == pageActive}
-                    >
+                      active={index == pageActive}>
                       {index + 1}
                     </Pagination.Item>
                   );

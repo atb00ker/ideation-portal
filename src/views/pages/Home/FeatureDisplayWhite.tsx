@@ -24,8 +24,7 @@ const FeatureDisplayWhite: React.FC<FeatureDisplayType> = ({ image, title, descr
             <Col
               className='cover-screen-flex'
               xs={{ order: 'first', span: '12' }}
-              md={{ order: 'last', span: '8' }}
-            >
+              md={{ order: 'last', span: '8' }}>
               <Image
                 className='d-none d-md-block cover-screen-flex'
                 src={image}

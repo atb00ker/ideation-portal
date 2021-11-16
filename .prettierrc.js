@@ -8,7 +8,7 @@ module.exports = {
   "printWidth": 110,
   "trailingComma": "all",
   "bracketSpacing": true,
-  "jsxBracketSameLine": true,
+  "bracketSameLine": true,
   "jsxSingleQuote": true,
   "arrowParens": "avoid",
   "endOfLine": "lf"
