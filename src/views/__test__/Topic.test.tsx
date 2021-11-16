@@ -10,13 +10,13 @@ import ReactDOM from 'react-dom';
 import { render, cleanup, act, waitFor, RenderResult } from '@testing-library/react';
 import renderer from 'react-test-renderer';
 import { HashRouter as Router } from 'react-router-dom';
-import Home from '../pages/Home/Home';
+import Topic from '../pages/Topic/Topic';
 import { MOCK_GET_TOPIC_COLLECTION } from './mock/ApolloQueries';
 
 const _homeComponent = (
   <ApolloMockedProvider addTypename={false} mocks={[MOCK_GET_TOPIC_COLLECTION]}>
     <Router>
-      <Home></Home>
+      <Topic></Topic>
     </Router>
   </ApolloMockedProvider>
 );

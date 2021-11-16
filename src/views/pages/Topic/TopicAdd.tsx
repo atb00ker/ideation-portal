@@ -80,7 +80,8 @@ const TopicAdd = () => {
                 className='mb-5 pb-2'
                 noValidate
                 validated={validated}
-                onSubmit={handleAddFormSubmit}>
+                onSubmit={handleAddFormSubmit}
+              >
                 <Form.Group as={Row} className='mb-3' controlId='topicTitle'>
                   <Form.Label column sm='2'>
                     Title

@@ -39,9 +39,9 @@ describe('Report page tests', () => {
     expect(page.getByText('New Ideas')).toBeInTheDocument();
     expect(page.getByText('Tasks in Progress')).toBeInTheDocument();
     expect(page.getByText('Completed Ideas')).toBeInTheDocument();
-    expect(page.getByTestId('reports-proposed-topics')).toHaveTextContent("1");
-    expect(page.getByTestId('reports-inprogress-topics')).toHaveTextContent("0");
-    expect(page.getByTestId('reports-completed-topics')).toHaveTextContent("0");
+    expect(page.getByTestId('reports-proposed-topics')).toHaveTextContent('1');
+    expect(page.getByTestId('reports-inprogress-topics')).toHaveTextContent('0');
+    expect(page.getByTestId('reports-completed-topics')).toHaveTextContent('0');
   });
 
   it('report snapshot structure', () => {

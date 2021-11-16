@@ -15,7 +15,8 @@ const DiscardModal: React.FC<IDiscardModal> = ({ show, modalClickYes, modalClick
       onHide={modalClickNo}
       show={show}
       aria-labelledby='contained-modal-title-vcenter'
-      centered>
+      centered
+    >
       <Modal.Body>Are you sure? You will lose all the changes on this page.</Modal.Body>
       <Modal.Footer style={{ padding: '2px' }}>
         <Button className='btn-sm btn-danger' onClick={modalClickYes}>

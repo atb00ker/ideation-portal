@@ -1,7 +1,10 @@
 import React, { useContext } from 'react';
+import { Link } from 'react-router-dom';
 import Container from 'react-bootstrap/Container';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
+import Button from 'react-bootstrap/Button';
+
 import EmptyInformationDashboard3 from '../../assets/illustrations/no-records-found-1.svg';
 import SocialNotification1 from '../../assets/illustrations/social-notifications-1.svg';
 import Search1 from '../../assets/illustrations/search-1.svg';
@@ -9,12 +12,10 @@ import Reports1 from '../../assets/illustrations/reports-1.svg';
 import SteppingToFuture from '../../assets/illustrations/stepping-to-future-1.svg';
 import { IAuth } from '../../interfaces/IAuth';
 import { AuthContext } from '../../components/Auth/AuthProvider';
-import Button from 'react-bootstrap/esm/Button';
 import { FeatureDisplayOffWhite } from './FeatureDisplayOffWhite';
 import { FeatureDisplayWhite } from './FeatureDisplayWhite';
-import './Home.scss';
 import { RouterPath } from '../../enums/RouterPath';
-import { Link } from 'react-router-dom';
+import './Home.scss';
 
 const Home: React.FC = () => {
   const auth: IAuth = useContext(AuthContext);
@@ -25,15 +26,14 @@ const Home: React.FC = () => {
           <Container className='d-flex-center'>
             <Row className='d-flex-center'>
               <Col sm='12' className='text-center-md mt-4 max-width-960'>
-                <h1>
-                  Ideate. Discuss. Achieve.
-                </h1>
+                <h1>Ideate. Discuss. Achieve.</h1>
                 {auth.isReady && !auth.isAuthenticated && (
                   <Button
                     data-testid='features-page-button'
                     onClick={() => auth.loginWithRedirect()}
                     className='d-inline'
-                    variant='primary'>
+                    variant='primary'
+                  >
                     Sign Up
                   </Button>
                 )}
@@ -58,13 +58,13 @@ const Home: React.FC = () => {
         image={SocialNotification1}
         imageWidth={'550px'}
         title='Socialize'
-        description="Comment, like, discuss and contribute to the projects that interest you."
+        description='Comment, like, discuss and contribute to the projects that interest you.'
       />
       <FeatureDisplayWhite
         image={Reports1}
         imageWidth={'550px'}
         title='Reports'
-        description="See the big big picture of how we are ideating and innovating as a whole."
+        description='See the big big picture of how we are ideating and innovating as a whole.'
       />
       <FeatureDisplayOffWhite
         image={SteppingToFuture}
@@ -81,7 +81,8 @@ const Home: React.FC = () => {
               </Col>
               <Col sm='12' className='d-flex-center text-center max-width-960'>
                 <h5>
-                  Find more information and sources about the idea. Findout who proposed the idea...<br />
+                  Find more information and sources about the idea. Findout who proposed the idea...
+                  <br />
                   So, what are you waiting for?
                   <br />
                   <Link to={RouterPath.Topic}>
