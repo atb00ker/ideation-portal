@@ -1,6 +1,6 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
+import { HashRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ApolloProvider from './components/ApolloProvider/ApolloProvider';
 import AuthProvider from './components/Auth/AuthProvider';
@@ -20,8 +20,8 @@ const App = () => {
         <Router>
           <Navbar />
           <Switch>
-            <Route path={RouterPath.TopicDetails} render={props => <TopicDetails {...props} />} />
             <Route path={RouterPath.TopicAdd} component={TopicAdd} />
+            <Route path={RouterPath.TopicDetails} render={props => <TopicDetails {...props} />} />
             <Route path={RouterPath.Topic} component={Topic} />
             <Route path={RouterPath.Reports} component={Reports} />
             <Route exact path={RouterPath.Home} component={Home} />

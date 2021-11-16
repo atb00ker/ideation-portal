@@ -1,4 +1,4 @@
-import React, { FormEvent } from 'react';
+import React from 'react';
 import { Link } from 'react-router-dom';
 import Row from 'react-bootstrap/Row';
 import Col from 'react-bootstrap/Col';
@@ -43,7 +43,7 @@ const TopicsIndexOperations: React.FC<ITopicsIndexOperations> = ({
                 Please click the 'add' button to share.
               </Col>
               <Col className='pe-0' sm={2} md={1}>
-                <Link to={RouterPath.Topic}>
+                <Link to={RouterPath.TopicAdd}>
                   <Button className='float-end' variant='primary'>
                     Add
                   </Button>

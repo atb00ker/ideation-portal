@@ -8,14 +8,12 @@ module.exports = {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.bundle.js',
     chunkFilename: '[id].js',
-    publicPath: '/'
   },
   devServer: {
     port: 8010,
     static: {
       directory: path.join(__dirname, 'dist')
     },
-    historyApiFallback: true,
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
