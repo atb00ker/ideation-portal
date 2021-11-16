@@ -11,7 +11,10 @@ module.exports = {
   },
   devServer: {
     port: 8010,
-    watchContentBase: true,
+    static: {
+      directory: path.join(__dirname, 'dist')
+    },
+    historyApiFallback: true,
   },
   resolve: {
     extensions: [".js", ".jsx", ".json", ".ts", ".tsx"],
