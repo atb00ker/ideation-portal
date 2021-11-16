@@ -1,14 +1,16 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import { HashRouter as Router, Route, Switch } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Switch } from 'react-router-dom';
 
 import ApolloProvider from './components/ApolloProvider/ApolloProvider';
 import AuthProvider from './components/Auth/AuthProvider';
 import Navbar from './components/Navbar/Navbar';
 import Home from './pages/Home/Home';
-import TopicAdd from './pages/TopicAdd/TopicAdd';
-import TopicDetails from './pages/TopicDetails/TopicDetails';
+import Topic from './pages/Topic/Topic';
+import TopicAdd from './pages/Topic/TopicAdd';
+import TopicDetails from './pages/Topic/TopicDetails';
 import Reports from './pages/Reports/Reports';
+import { RouterPath } from './enums/RouterPath';
 import './index.scss';
 
 const App = () => {
@@ -18,10 +20,11 @@ const App = () => {
         <Router>
           <Navbar />
           <Switch>
-            <Route path='/topic/:uuid' render={props => <TopicDetails {...props} />} />
-            <Route path='/topic/' component={TopicAdd} />
-            <Route path='/reports/' component={Reports} />
-            <Route exact path='/' component={Home} />
+            <Route path={RouterPath.TopicDetails} render={props => <TopicDetails {...props} />} />
+            <Route path={RouterPath.TopicAdd} component={TopicAdd} />
+            <Route path={RouterPath.Topic} component={Topic} />
+            <Route path={RouterPath.Reports} component={Reports} />
+            <Route exact path={RouterPath.Home} component={Home} />
           </Switch>
         </Router>
       </ApolloProvider>

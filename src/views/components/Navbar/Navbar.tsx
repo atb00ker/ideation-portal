@@ -26,6 +26,11 @@ const Navbar = () => {
                 Home
               </Button>
             </Link>
+            <Link to={RouterPath.Topic}>
+              <Button className='m-1 btn-sm' variant='primary'>
+                Ideas
+              </Button>
+            </Link>
             <Link to={RouterPath.Reports}>
               <Button className='m-1 btn-sm' variant='primary'>
                 Reports

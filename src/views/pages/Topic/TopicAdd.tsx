@@ -16,6 +16,7 @@ import SectionLoader from '../../components/ContentState/SectionLoader';
 import ServerRequestError from '../../components/ContentState/ServerRequestError';
 import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
 import CreateTopic from '../../graphql/CreateTopic';
+import { RouterPath } from '../../enums/RouterPath';
 
 const TopicAdd = () => {
   const auth: IAuth = useContext(AuthContext);
@@ -51,7 +52,7 @@ const TopicAdd = () => {
       };
 
       createTopic({ variables: { ...formValues, ...userValues } })
-        .then(_ => history.push('/'))
+        .then(_ => history.push(RouterPath.Topic))
         .catch(_ => {
           setLoading(false);
           setError(true);
@@ -213,7 +214,7 @@ const TopicAdd = () => {
           show={showDiscard}
           modalClickYes={() => {
             setShowDiscard(false);
-            history.push('/');
+            history.push(RouterPath.Topic);
           }}
           modalClickNo={() => setShowDiscard(false)}
         />

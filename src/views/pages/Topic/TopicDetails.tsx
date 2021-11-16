@@ -23,6 +23,7 @@ import UserUnlikedTopic from '../../graphql/UserUnlikedTopic';
 import ChangeTopicStep from '../../graphql/ChangeTopicStep';
 import CreateComment from '../../graphql/CreateComment';
 import { ErrorFallback } from '../../components/ContentState/ErrorFallback';
+import { RouterPath } from '../../enums/RouterPath';
 import './topic-details.scss';
 
 const TopicDetails = (props: any) => {
@@ -142,7 +143,7 @@ const TopicDetails = (props: any) => {
             <Col xs={12} className='mb-5 m-auto d-lg-inline-flex max-width-960'>
               <Button
                 onClick={() => {
-                  history.push('/');
+                  history.push(RouterPath.Topic);
                 }}
                 style={{ minWidth: '70px' }}
                 variant='outline-primary'

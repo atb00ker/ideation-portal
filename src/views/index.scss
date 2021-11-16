@@ -45,6 +45,26 @@ select {
   color: white;
 }
 
+.href-no-underline {
+  cursor: pointer;
+  text-decoration: unset;
+}
+
+.d-flex-center {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.button-href {
+  text-decoration: unset;
+  color: white;
+}
+
+.button-href:hover {
+  color: white;
+}
+
 /* Scrollbar */
 
 :root {

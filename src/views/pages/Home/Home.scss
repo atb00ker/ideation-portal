@@ -1,0 +1,32 @@
+.cover-screen {
+  height: calc(100vh - 60px);
+}
+
+.bg-off-white {
+  background-color: whitesmoke;
+  border-color: whitesmoke;
+  border-radius: 25% 2% 25% 2%;
+  border-style: solid;
+}
+
+.cover-screen-flex {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+@media (min-width: 768px) {
+  .cover-screen-flex {
+    height: 100%;
+  }
+}
+
+@media (max-width: 768px) {
+  .text-center-md {
+    text-align: center;
+  }
+
+  .bg-off-white {
+    border-radius: 10% 1% 10% 1%;
+  }
+}

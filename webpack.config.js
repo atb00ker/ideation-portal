@@ -7,7 +7,8 @@ module.exports = {
   output: {
     path: path.resolve(__dirname, 'dist'),
     filename: 'main.bundle.js',
-    chunkFilename: '[id].js'
+    chunkFilename: '[id].js',
+    publicPath: '/'
   },
   devServer: {
     port: 8010,
@@ -49,7 +50,6 @@ module.exports = {
         ]
       },
       {
-
         test: /\.svg$/,
         use: [
           {
